@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const SponsorsPartnersSection = () => {
   const [time, setTime] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const isMobile = useIsMobile();
 
   const sponsors = [
     {
@@ -58,18 +61,19 @@ const SponsorsPartnersSection = () => {
   ];
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setTime((prev) => prev + 0.03);
     }, 50);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const getConcurrentPosition = (
     index: number,
     total: number,
     offset: number = 0
   ) => {
-    const spacing = 300; // Reduced spacing for mobile
+    const spacing = isMobile ? 180 : 220;
     const moveX = (time + offset) * 80; // Slower movement for mobile
 
     // Calculate base position
@@ -108,7 +112,11 @@ const SponsorsPartnersSection = () => {
           <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-4 sm:mb-6">
             Our Sponsors
           </h3>
-          <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+          <div
+            className="relative h-48 sm:h-56 md:h-64 overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {/* First set of containers */}
             {sponsors.map((sponsor, index) => {
               const pos = getConcurrentPosition(index, sponsors.length, 0);
@@ -148,7 +156,9 @@ const SponsorsPartnersSection = () => {
                   key={`sponsor-2-${index}`}
                   className="absolute top-1/2 transform -translate-y-1/2"
                   style={{
-                    transform: `translateX(${pos.x + sponsors.length * 300}px)`,
+                    transform: `translateX(${
+                      pos.x + sponsors.length * (isMobile ? 180 : 220)
+                    }px)`,
                     left: "0",
                   }}
                 >
@@ -178,7 +188,11 @@ const SponsorsPartnersSection = () => {
           <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-4 sm:mb-6">
             Our Partners
           </h3>
-          <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+          <div
+            className="relative h-48 sm:h-56 md:h-64 overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {/* First set of containers */}
             {partners.map((partner, index) => {
               const pos = getConcurrentPosition(index, partners.length, 200);
@@ -218,7 +232,9 @@ const SponsorsPartnersSection = () => {
                   key={`partner-2-${index}`}
                   className="absolute top-1/2 transform -translate-y-1/2"
                   style={{
-                    transform: `translateX(${pos.x + partners.length * 300}px)`,
+                    transform: `translateX(${
+                      pos.x + partners.length * (isMobile ? 180 : 220)
+                    }px)`,
                     left: "0",
                   }}
                 >
