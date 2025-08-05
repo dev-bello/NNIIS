@@ -7,15 +7,17 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-16 bg-nigeria-green">
+    <section className="py-12 sm:py-16 bg-nigeria-green relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4 px-4">
             Fostering a thriving investment ecosystem in Northern Nigeria
           </h2>
           <p className="text-white/90 text-base sm:text-lg max-w-3xl mx-auto px-4">
-            A landmark event bringing together 400+ high-level participants from across Nigeria, Africa, and the global investment community. 
-            The summit will facilitate valuable connections among investors, government officials, industry leaders, and development partners.
+            A landmark event bringing together 400+ high-level participants from
+            across Nigeria, Africa, and the global investment community. The
+            summit will facilitate valuable connections among investors,
+            government officials, industry leaders, and development partners.
           </p>
         </div>
 
@@ -39,6 +41,31 @@ const StatsSection = () => {
             PARTNER WITH US
           </button>
         </div>
+      </div>
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-16 sm:w-32 h-16 sm:h-32 bg-white/5 rounded-full animate-pulse"></div>
+        <div
+          className="absolute top-40 right-20 w-12 sm:w-24 h-12 sm:h-24 bg-white/5 rounded-full animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-40 left-1/4 w-10 sm:w-20 h-10 sm:h-20 bg-white/5 rounded-full animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+
+        <img
+          src="/images/icons/icon2.svg"
+          alt=""
+          className="absolute top-40 right-20 w-12 sm:w-24 h-12 sm:h-24 text-white/10 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
+        <img
+          src="/images/icons/icon3.svg"
+          alt=""
+          className="absolute bottom-40 left-1/4 w-10 sm:w-20 h-10 sm:h-20 text-white/10 animate-pulse"
+          style={{ animationDelay: "2s" }}
+        />
       </div>
     </section>
   );

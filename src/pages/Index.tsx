@@ -6,6 +6,7 @@ import KeySpeakersSection from "@/components/KeySpeakersSection";
 import HighlightsSection from "@/components/HighlightsSection";
 import SponsorsPartnersSection from "@/components/SponsorsPartnersSection";
 import TickerSection from "@/components/TickerSection";
+import MasterclassesSection from "@/components/MasterclassesSection";
 
 const Index = () => {
   return (
@@ -17,6 +18,7 @@ const Index = () => {
       <StatsSection />
       <KeySpeakersSection />
       <HighlightsSection />
+      <MasterclassesSection />
       <SponsorsPartnersSection />
     </div>
   );

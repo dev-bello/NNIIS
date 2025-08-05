@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { config } from "@/lib/config";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,37 +19,51 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <a
-              href="#about"
-              className="text-gray-700 hover:text-primary transition-colors"
-            >
-              About NNIIS
-            </a>
-            <a
-              href="#sponsorship"
-              className="text-gray-700 hover:text-primary transition-colors"
-            >
-              Sponsorship
-            </a>
-            <a
-              href="#exhibition"
-              className="text-gray-700 hover:text-primary transition-colors"
-            >
-              Exhibition
-            </a>
-            <a
-              href="#speakers"
-              className="text-gray-700 hover:text-primary transition-colors"
-            >
-              Speakers
-            </a>
+            {config.navLinks.map((link) =>
+              link.children ? (
+                <div key={link.label} className="relative group">
+                  <span className="text-gray-700 hover:text-primary transition-colors cursor-pointer flex items-center">
+                    {link.label}
+                    <svg
+                      className="w-4 h-4 ml-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </span>
+                  <div className="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-2 py-2 w-48 z-50">
+                    {link.children.map((child) => (
+                      <a
+                        key={child.href}
+                        href={child.href}
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-gray-700 hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           {/* Desktop Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="hero" size="default">
-              Register for Summit
-            </Button>
             <Button variant="outline" size="default">
               Log In
             </Button>
@@ -88,39 +103,38 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4 pt-4">
-              <a
-                href="#about"
-                className="text-gray-700 hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About NNIIS
-              </a>
-              <a
-                href="#sponsorship"
-                className="text-gray-700 hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sponsorship
-              </a>
-              <a
-                href="#exhibition"
-                className="text-gray-700 hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Exhibition
-              </a>
-              <a
-                href="#speakers"
-                className="text-gray-700 hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Speakers
-              </a>
+              {config.navLinks.map((link) =>
+                link.children ? (
+                  <div key={link.label}>
+                    <span className="text-gray-700 font-semibold py-2">
+                      {link.label}
+                    </span>
+                    <div className="flex flex-col space-y-2 pl-4 mt-2">
+                      {link.children.map((child) => (
+                        <a
+                          key={child.href}
+                          href={child.href}
+                          className="text-gray-700 hover:text-primary transition-colors py-2"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {child.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-gray-700 hover:text-primary transition-colors py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
             </nav>
             <div className="flex flex-col space-y-3 pt-4">
-              <Button variant="hero" size="default" className="w-full">
-                Register for Summit
-              </Button>
               <Button variant="outline" size="default" className="w-full">
                 Log In
               </Button>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const SponsorsPartnersSection = () => {
@@ -109,7 +110,7 @@ const SponsorsPartnersSection = () => {
 
         {/* Sponsors Section */}
         <div className="mb-12 sm:mb-16 md:mb-20">
-          <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-4 sm:mb-6">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-8">
             Our Sponsors
           </h3>
           <div
@@ -185,7 +186,7 @@ const SponsorsPartnersSection = () => {
 
         {/* Partners Section */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-4 sm:mb-6">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-8">
             Our Partners
           </h3>
           <div
@@ -257,6 +258,12 @@ const SponsorsPartnersSection = () => {
               );
             })}
           </div>
+        </div>
+
+        <div className="text-center mt-12">
+          <Button asChild size="lg">
+            <a href="/exhibition">Become a Sponsor</a>
+          </Button>
         </div>
 
         {/* Background Decorative Elements */}
