@@ -12,7 +12,7 @@ const RegisterPage = () => {
 
   useEffect(() => {
     const type = searchParams.get("type");
-    if (type === "exhibitor" || type === "volunteer") {
+    if (type === "exhibitor") {
       setRegistrationType(type);
     }
   }, [searchParams]);
@@ -47,16 +47,6 @@ const RegisterPage = () => {
               }`}
             >
               Exhibitor
-            </button>
-            <button
-              onClick={() => setRegistrationType("volunteer")}
-              className={`px-4 py-2 border-t border-b border-r border-gray-300 text-sm font-medium rounded-r-md ${
-                registrationType === "volunteer"
-                  ? "bg-primary text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-50"
-              }`}
-            >
-              Volunteer
             </button>
           </div>
         </div>
@@ -156,48 +146,7 @@ const RegisterPage = () => {
               </Button>
             </div>
           </form>
-        ) : (
-          <form className="mt-8 space-y-6">
-            <div className="rounded-md shadow-sm space-y-4">
-              <Input
-                name="full-name"
-                type="text"
-                required
-                placeholder="Full Name"
-              />
-              <Input
-                name="email"
-                type="email"
-                required
-                placeholder="Email Address"
-              />
-              <Input
-                name="phone"
-                type="tel"
-                required
-                placeholder="Phone Number"
-              />
-              <textarea
-                name="skills"
-                placeholder="Skills and Experience"
-                className="w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md"
-              />
-              <select
-                name="availability"
-                className="w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md"
-              >
-                <option>Full-time</option>
-                <option>Part-time</option>
-              </select>
-            </div>
-
-            <div>
-              <Button type="submit" className="w-full">
-                Become a Volunteer
-              </Button>
-            </div>
-          </form>
-        )}
+        ) : null}
       </div>
     </div>
   );
