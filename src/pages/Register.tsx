@@ -9,6 +9,15 @@ import { useState, useEffect } from "react";
 const RegisterPage = () => {
   const [searchParams] = useSearchParams();
   const [registrationType, setRegistrationType] = useState("attendee");
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+
+  const handleClassChange = (className: string) => {
+    setSelectedClasses((prev) =>
+      prev.includes(className)
+        ? prev.filter((c) => c !== className)
+        : [...prev, className]
+    );
+  };
 
   useEffect(() => {
     const type = searchParams.get("type");
@@ -76,10 +85,17 @@ const RegisterPage = () => {
             </div>
 
             <div className="space-y-4">
-              <Label>Masterclasses</Label>
+              <Label>Masterclasses (select up to 4)</Label>
               {config.masterclasses.map((masterclass) => (
                 <div key={masterclass.title} className="flex items-center">
-                  <Checkbox id={`attendee-${masterclass.title}`} />
+                  <Checkbox
+                    id={`attendee-${masterclass.title}`}
+                    onCheckedChange={() => handleClassChange(masterclass.title)}
+                    disabled={
+                      selectedClasses.length >= 4 &&
+                      !selectedClasses.includes(masterclass.title)
+                    }
+                  />
                   <Label
                     htmlFor={`attendee-${masterclass.title}`}
                     className="ml-2"

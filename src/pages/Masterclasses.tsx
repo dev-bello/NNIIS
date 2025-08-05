@@ -1,3 +1,4 @@
+import { MasterclassCard } from "@/components/MasterclassCard";
 import { Button } from "@/components/ui/button";
 import { config } from "@/lib/config";
 import { Link } from "react-router-dom";
@@ -25,47 +26,16 @@ const MasterclassesPage = () => {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
+          <div className="mb-8 text-center">
             <Button asChild>
               <Link to="/">{"<- Back to Home"}</Link>
             </Button>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {config.masterclasses.map((masterclass, index) => (
-              <div
-                key={index}
-                className="bg-gray-50 rounded-lg shadow-lg p-6 flex flex-col group"
-              >
-                <div className="relative">
-                  <img
-                    src={masterclass.image}
-                    alt={masterclass.title}
-                    className="rounded-lg mb-4 h-48 w-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <img
-                    src={`/images/icons/icon${(index % 3) + 1}.svg`}
-                    alt=""
-                    className="w-10 h-10 absolute -top-2 -right-2 bg-white rounded-full p-1 border-2 border-primary"
-                  />
-                </div>
-                <div className="flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    {masterclass.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 flex-grow">
-                    {masterclass.description}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    with{" "}
-                    <span className="font-semibold">{masterclass.expert}</span>
-                  </p>
-                </div>
-                <Button asChild className="mt-6 w-full">
-                  <a href="/register">Register Now</a>
-                </Button>
-              </div>
+              <MasterclassCard key={index} masterclass={masterclass} />
             ))}
           </div>
         </div>

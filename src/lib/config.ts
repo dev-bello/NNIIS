@@ -17,31 +17,89 @@ export const config = {
   },
   masterclasses: [
     {
-      title: "Solid Minerals",
-      description: "Unlock the potential of Nigeria's vast mineral resources.",
-      expert: "Mr. Nura Ibrahim",
-      image: "/images/events/masterclass/masterclass1.jpg",
+      sector: "Tech",
+      title:
+        "Smart Infrastructure: Leveraging IoT & Data for Industrial Growth",
+      expert: "Abdul Samad Rabiu",
+      company: "BUA Group",
+      image: "/images/khalil-suleiman-halilu.jpg",
     },
     {
-      title: "Technology",
-      description:
-        "Driving innovation and digital transformation in Northern Nigeria.",
+      sector: "Agriculture",
+      title: "Building Export-Ready Agribusinesses in Northern Nigeria",
+      expert: "Dr. Akinwumi Adesina",
+      company: "African Development Bank",
+      image: "/speakers/adesina.png",
+    },
+    {
+      sector: "Power / Energy",
+      title:
+        "Energy Efficiency & Smart Grids: Reducing Power Losses in Northern Nigeria",
+      expert: "Prof. Ango Abdullahi",
+      company: "Ahmadu Bello University",
+      image: "/images/profango.png",
+    },
+    {
+      sector: "Agriculture",
+      title: "Climate-Smart Dryland Farming: Innovations for Northern States",
+      expert: "Audu Ogbeh",
+      company: "Federal Ministry of Agriculture and Rural Development",
+      image: "/images/Audu-Ogbeh.jpg",
+    },
+    {
+      sector: "Solid Minerals",
+      title: "Processing & Value Addition: Moving Beyond Raw Mineral Exports",
+      expert: "Aliko Dangote",
+      company: "Dangote Group",
+      image: "/speakers/dangote.png",
+    },
+    {
+      sector: "Agriculture",
+      title: "Value Chain Finance: Unlocking Capital for Smallholder Farmers",
+      expert: "Aliyu Abdullahi",
+      company: "Central Bank of Nigeria",
+      image: "/speakers/abdullahi.png",
+    },
+    {
+      sector: "Power / Energy",
+      title:
+        "Off-Grid Solar & Mini-Grids: Scaling Rural Electrification Profitably",
+      expert: "Mr. Habu Sadeik",
+      company: "Nigerian Electricity Regulatory Commission",
+      image: "/images/Habu-sadiek.jpg",
+    },
+
+    {
+      sector: "Solid Minerals",
+      title:
+        "Concession to Market: A-Z of Mineral Licensing & Investment Readiness",
+      expert: "Mr. Nura Ibrahim",
+      company: "Ministry of Mines and Steel Development",
+      image: "/images/events/masterclass/masterclass1.jpg",
+    },
+
+    {
+      sector: "Power / Energy",
+      title: "Policy & Licensing Mastery: Navigating Power Sector Regulations",
+      expert: "Mr. Tahir Abubakar",
+      company: "Transmission Company of Nigeria",
+      image: "/images/tahir.PNG",
+    },
+    {
+      sector: "Tech",
+      title:
+        "Digitizing Agriculture: Building Agri-Tech Solutions for Northern Farmers",
       expert: "Mr. Khalil Suleiman Halilu ",
+      company:
+        "National Agency for Science and Engineering Infrastructure (NASENI)",
       image: "/images/Khalil-suleiman-halilu.jpg",
     },
     {
-      title: "Power",
-      description:
-        "Developing sustainable energy solutions for a brighter future.",
-      expert: "Mr. Habu Sadeik",
-      image: "/images/Habu-sadiek.jpg",
-    },
-    {
-      title: "Agriculture",
-      description:
-        "Modernizing agriculture for food security and economic growth.",
-      expert: "Mr. Tahir Abubakar",
-      image: "/images/tahir.PNG",
+      sector: "Solid Minerals",
+      title: "Community Agreements & ESG in Mining",
+      expert: "Theophilus Danjuma",
+      company: "South Atlantic Petroleum",
+      image: "/images/danjuma.jpg",
     },
   ],
 };

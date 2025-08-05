@@ -19,13 +19,10 @@ const MasterclassesSection = () => {
               key={index}
               className="bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
-                {masterclass.title}
+              <h3 className="text-lg font-bold text-gray-900 mb-2">
+                {masterclass.sector}
               </h3>
-              <p className="text-gray-600 mb-4">{masterclass.description}</p>
-              <p className="text-sm text-gray-500">
-                with <span className="font-semibold">{masterclass.expert}</span>
-              </p>
+              <p className="text-gray-600 mb-4">{masterclass.title}</p>
             </div>
           ))}
         </div>

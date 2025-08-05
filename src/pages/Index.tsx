@@ -6,8 +6,8 @@ import KeySpeakersSection from "@/components/KeySpeakersSection";
 import HighlightsSection from "@/components/HighlightsSection";
 import SponsorsPartnersSection from "@/components/SponsorsPartnersSection";
 import TickerSection from "@/components/TickerSection";
-import MasterclassesSection from "@/components/MasterclassesSection";
 import VolunteerSection from "@/components/VolunteerSection";
+import MatchmakingSection from "@/components/MatchmakingSection";
 
 const Index = () => {
   return (
@@ -20,7 +20,7 @@ const Index = () => {
       <KeySpeakersSection />
       <HighlightsSection />
       <TickerSection />
-      <MasterclassesSection />
+      <MatchmakingSection />
       <SponsorsPartnersSection />
       <VolunteerSection />
     </div>
