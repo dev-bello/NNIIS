@@ -40,7 +40,6 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
         <Button asChild variant="hero" size="lg" className="w-full sm:w-auto">
           <a href="/register">{config.buttons.register}</a>
         </Button>
@@ -70,12 +69,12 @@ const HeroSection = () => {
           style={{ animationDelay: "0.8s" }}
         ></div>
 
-        <img
+        {/* <img
           src="/images/icons/icon2.svg"
           alt=""
           className="absolute top-40 right-20 w-12 sm:w-24 h-12 sm:h-24 text-white/20 animate-pulse"
           style={{ animationDelay: "1s" }}
-        />
+        /> */}
       </div>
     </section>
   );

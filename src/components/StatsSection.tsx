@@ -21,7 +21,6 @@ const StatsSection = () => {
           </p>
         </div>
 
-        {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
@@ -35,7 +34,6 @@ const StatsSection = () => {
           ))}
         </div>
 
-        {/* Partner CTA */}
         <div className="text-center mt-12 sm:mt-16">
           <button className="bg-white text-nigeria-green font-semibold px-6 sm:px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors w-full sm:w-auto">
             PARTNER WITH US
@@ -54,7 +52,7 @@ const StatsSection = () => {
           style={{ animationDelay: "2s" }}
         ></div>
 
-        <img
+        {/* <img
           src="/images/icons/icon2.svg"
           alt=""
           className="absolute top-40 right-20 w-12 sm:w-24 h-12 sm:h-24 text-white/10 animate-pulse"
@@ -65,7 +63,7 @@ const StatsSection = () => {
           alt=""
           className="absolute bottom-40 left-1/4 w-10 sm:w-20 h-10 sm:h-20 text-white/10 animate-pulse"
           style={{ animationDelay: "2s" }}
-        />
+        /> */}
       </div>
     </section>
   );
