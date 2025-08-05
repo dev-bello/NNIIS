@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const sponsorshipTiers = [
   {
@@ -71,6 +72,11 @@ const ExhibitionPage = () => {
 
       <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
+          <div className="mb-8">
+            <Button asChild>
+              <Link to="/">{"<- Back to Home"}</Link>
+            </Button>
+          </div>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">

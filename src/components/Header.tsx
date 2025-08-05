@@ -1,4 +1,10 @@
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { config } from "@/lib/config";
 
@@ -21,35 +27,33 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-8">
             {config.navLinks.map((link) =>
               link.children ? (
-                <div key={link.label} className="relative group">
-                  <span className="text-gray-700 hover:text-primary transition-colors cursor-pointer flex items-center">
-                    {link.label}
-                    <svg
-                      className="w-4 h-4 ml-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </span>
-                  <div className="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-2 py-2 w-48 z-50">
-                    {link.children.map((child) => (
-                      <a
-                        key={child.href}
-                        href={child.href}
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                <DropdownMenu key={link.label}>
+                  <DropdownMenuTrigger asChild>
+                    <span className="text-gray-700 hover:text-primary transition-colors cursor-pointer flex items-center">
+                      {link.label}
+                      <svg
+                        className="w-4 h-4 ml-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        {child.label}
-                      </a>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-48">
+                    {link.children.map((child) => (
+                      <DropdownMenuItem key={child.href} asChild>
+                        <a href={child.href}>{child.label}</a>
+                      </DropdownMenuItem>
                     ))}
-                  </div>
-                </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <a
                   key={link.href}
