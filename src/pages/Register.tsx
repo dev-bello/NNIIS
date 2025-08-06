@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { config } from "@/lib/config";
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
 const RegisterPage = () => {
   const [searchParams] = useSearchParams();
@@ -25,6 +27,64 @@ const RegisterPage = () => {
       setRegistrationType(type);
     }
   }, [searchParams]);
+
+  const handleAttendeeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    const { error } = await supabase.auth.signUp({
+      email: data.email as string,
+      password: Math.random().toString(36).slice(-8), // Generate a random password
+      options: {
+        data: {
+          full_name: data["full-name"],
+          phone: data.phone,
+          organization: data.organization,
+          job_title: data["job-title"],
+          masterclasses: selectedClasses,
+          type: "attendee",
+        },
+      },
+    });
+
+    if (error) {
+      toast.error("Error registering attendee. Please try again.");
+    } else {
+      toast.success(
+        "Registration successful! Please check your email to confirm."
+      );
+    }
+  };
+
+  const handleExhibitorSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    const { error } = await supabase.auth.signUp({
+      email: data.email as string,
+      password: Math.random().toString(36).slice(-8), // Generate a random password
+      options: {
+        data: {
+          company_name: data["company-name"],
+          contact_person: data["contact-person"],
+          phone: data.phone,
+          address: data.address,
+          sponsorship_tier: data["sponsorship-tier"],
+          type: "exhibitor",
+        },
+      },
+    });
+
+    if (error) {
+      toast.error("Error registering exhibitor. Please try again.");
+    } else {
+      toast.success(
+        "Registration successful! Please check your email to confirm."
+      );
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -61,7 +121,7 @@ const RegisterPage = () => {
         </div>
 
         {registrationType === "attendee" ? (
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmit={handleAttendeeSubmit}>
             <div className="rounded-md shadow-sm space-y-4">
               <Input
                 name="full-name"
@@ -113,7 +173,7 @@ const RegisterPage = () => {
             </div>
           </form>
         ) : registrationType === "exhibitor" ? (
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmit={handleExhibitorSubmit}>
             <div className="rounded-md shadow-sm space-y-4">
               <Input
                 name="company-name"
