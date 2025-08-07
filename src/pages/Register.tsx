@@ -12,6 +12,7 @@ const RegisterPage = () => {
   const [searchParams] = useSearchParams();
   const [registrationType, setRegistrationType] = useState("attendee");
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClassChange = (className: string) => {
     setSelectedClasses((prev) =>
@@ -30,7 +31,9 @@ const RegisterPage = () => {
 
   const handleAttendeeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    setIsLoading(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     const { error } = await supabase.auth.signUp({
@@ -48,18 +51,24 @@ const RegisterPage = () => {
       },
     });
 
+    setIsLoading(false);
+
     if (error) {
       toast.error("Error registering attendee. Please try again.");
     } else {
       toast.success(
         "Registration successful! Please check your email to confirm."
       );
+      form.reset();
+      setSelectedClasses([]);
     }
   };
 
   const handleExhibitorSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    setIsLoading(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     const { error } = await supabase.auth.signUp({
@@ -77,12 +86,15 @@ const RegisterPage = () => {
       },
     });
 
+    setIsLoading(false);
+
     if (error) {
       toast.error("Error registering exhibitor. Please try again.");
     } else {
       toast.success(
         "Registration successful! Please check your email to confirm."
       );
+      form.reset();
     }
   };
 
@@ -167,8 +179,8 @@ const RegisterPage = () => {
             </div>
 
             <div>
-              <Button type="submit" className="w-full">
-                {config.buttons.register}
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Registering..." : config.buttons.register}
               </Button>
             </div>
           </form>
@@ -217,8 +229,8 @@ const RegisterPage = () => {
             </div>
 
             <div>
-              <Button type="submit" className="w-full">
-                Book Your Stand
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Booking..." : "Book Your Stand"}
               </Button>
             </div>
           </form>
