@@ -9,6 +9,7 @@ import RegisterPage from "./pages/Register";
 import ExhibitionPage from "./pages/Exhibition";
 import MasterclassesPage from "./pages/Masterclasses";
 import VolunteerPage from "./pages/Volunteer";
+import RegistrationSuccessPage from "./pages/RegistrationSuccess";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,10 @@ const App = () => (
           <Route path="/masterclasses" element={<MasterclassesPage />} />
 
           <Route path="/volunteer" element={<VolunteerPage />} />
+          <Route
+            path="/registration-success"
+            element={<RegistrationSuccessPage />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
