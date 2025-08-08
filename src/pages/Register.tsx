@@ -132,6 +132,15 @@ const RegisterPage = () => {
           </div>
         </div>
 
+        <div className="text-center">
+          <a
+            href="/retrieve-qr"
+            className="font-medium text-primary hover:text-primary-dark"
+          >
+            Already registered? Retrieve your QR code
+          </a>
+        </div>
+
         {registrationType === "attendee" ? (
           <form className="mt-8 space-y-6" onSubmit={handleAttendeeSubmit}>
             <div className="rounded-md shadow-sm space-y-4">

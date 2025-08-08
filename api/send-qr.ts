@@ -12,17 +12,18 @@ export default async function handler(
   try {
     const { record } = request.body;
     console.log("Request body:", request.body);
-    const { email, full_name, masterclasses, company_name, contact_person } =
-      record;
+    const {
+      id,
+      email,
+      full_name,
+      masterclasses,
+      company_name,
+      contact_person,
+    } = record;
 
     const isAttendee = !!full_name;
 
-    const qrCodeData = JSON.stringify({
-      fullName: isAttendee ? full_name : contact_person,
-      email,
-      masterclasses: isAttendee ? masterclasses : [],
-      companyName: isAttendee ? "" : company_name,
-    });
+    const qrCodeData = `${process.env.VITE_BASE_URL}/retrieve-qr/${id}`;
 
     console.log("QR code data:", qrCodeData);
 

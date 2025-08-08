@@ -68,8 +68,12 @@ const Header = () => {
 
           {/* Desktop Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="outline" size="default">
-              Log In
+            <Button
+              variant="outline"
+              size="default"
+              onClick={() => (window.location.href = "/retrieve-qr")}
+            >
+              Already Registered?
             </Button>
           </div>
 
@@ -139,8 +143,13 @@ const Header = () => {
               )}
             </nav>
             <div className="flex flex-col space-y-3 pt-4">
-              <Button variant="outline" size="default" className="w-full">
-                Log In
+              <Button
+                variant="outline"
+                size="default"
+                className="w-full"
+                onClick={() => (window.location.href = "/retrieve-qr")}
+              >
+                Already Registered?
               </Button>
             </div>
           </div>
