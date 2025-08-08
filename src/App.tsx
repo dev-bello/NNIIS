@@ -11,7 +11,6 @@ import MasterclassesPage from "./pages/Masterclasses";
 import VolunteerPage from "./pages/Volunteer";
 import RegistrationSuccessPage from "./pages/RegistrationSuccess";
 import RetrieveQrPage from "./pages/RetrieveQr";
-import EmailVerifiedPage from "./pages/EmailVerified";
 
 const queryClient = new QueryClient();
 
@@ -34,7 +33,6 @@ const App = () => (
           />
           <Route path="/retrieve-qr" element={<RetrieveQrPage />} />
           <Route path="/retrieve-qr/:id" element={<RetrieveQrPage />} />
-          <Route path="/email-verified" element={<EmailVerifiedPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
