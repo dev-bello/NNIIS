@@ -35,6 +35,12 @@ const RegisterPage = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
+    const thematicAreas = config.thematicAreas.reduce((acc, area) => {
+      if (data[area.title]) {
+        return { ...acc, [area.title]: data[area.title] };
+      }
+      return acc;
+    }, {});
 
     const { error } = await supabase.auth.signUp({
       email: data.email as string,
@@ -45,7 +51,7 @@ const RegisterPage = () => {
           phone: data.phone,
           organization: data.organization,
           job_title: data["job-title"],
-          masterclasses: selectedClasses,
+          thematic_areas: { ...thematicAreas, ...selectedClasses },
           type: "attendee",
         },
       },
@@ -78,9 +84,12 @@ const RegisterPage = () => {
         data: {
           company_name: data["company-name"],
           contact_person: data["contact-person"],
+          job_title: data["job-title"],
           phone: data.phone,
           address: data.address,
           sponsorship_tier: data["sponsorship-tier"],
+          commercial_space: data["commercial-space"],
+          downstream_stakeholders: data["downstream-stakeholders"],
           type: "exhibitor",
         },
       },
@@ -166,23 +175,35 @@ const RegisterPage = () => {
             </div>
 
             <div className="space-y-4">
-              <Label>Masterclasses (select up to 4)</Label>
-              {config.masterclasses.map((masterclass) => (
-                <div key={masterclass.title} className="flex items-center">
-                  <Checkbox
-                    id={`attendee-${masterclass.title}`}
-                    onCheckedChange={() => handleClassChange(masterclass.title)}
-                    disabled={
-                      selectedClasses.length >= 4 &&
-                      !selectedClasses.includes(masterclass.title)
-                    }
-                  />
-                  <Label
-                    htmlFor={`attendee-${masterclass.title}`}
-                    className="ml-2"
-                  >
-                    {masterclass.title}
-                  </Label>
+              <Label>Thematic Areas</Label>
+              {config.thematicAreas.map((area) => (
+                <div key={area.title}>
+                  {area.options.length > 0 ? (
+                    <select
+                      name={area.title}
+                      className="w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md"
+                    >
+                      <option value="">{`Select ${area.title}`}</option>
+                      {area.options.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <div className="flex items-center">
+                      <Checkbox
+                        id={`attendee-${area.title}`}
+                        onCheckedChange={() => handleClassChange(area.title)}
+                      />
+                      <Label
+                        htmlFor={`attendee-${area.title}`}
+                        className="ml-2"
+                      >
+                        {area.title}
+                      </Label>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -208,6 +229,7 @@ const RegisterPage = () => {
                 required
                 placeholder="Contact Person"
               />
+              <Input name="job-title" type="text" placeholder="Job Title" />
               <Input
                 name="email"
                 type="email"
@@ -234,7 +256,19 @@ const RegisterPage = () => {
                 <option value="gold">Gold Sponsor</option>
                 <option value="silver">Silver Sponsor</option>
                 <option value="exhibitor">Exhibitor</option>
+                <option value="corporate-attendee">Corporate Attendee</option>
+                <option value="group-participation">Group Participation</option>
               </select>
+              <Input
+                name="commercial-space"
+                type="text"
+                placeholder="3D Drafting of Commercial spaces"
+              />
+              <Input
+                name="downstream-stakeholders"
+                type="text"
+                placeholder="Major & mid-tiers (downstream stake holders)"
+              />
             </div>
 
             <div>

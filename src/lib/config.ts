@@ -15,6 +15,29 @@ export const config = {
     learnMore: "Learn More",
     partnerWithUs: "Partner With Us",
   },
+  thematicAreas: [
+    {
+      title: "Export Ready Agribusiness",
+      options: [],
+    },
+    {
+      title: "Industrial parks (MAP)",
+      options: ["Sea port", "Dryports", "All industrial zones"],
+    },
+    {
+      title: "Energy efficiency and smart Grids",
+      options: ["Distribution", "Transmission"],
+    },
+    {
+      title:
+        "Off grids & Mini Grids scaling rural electric profitability (Thermal)",
+      options: [],
+    },
+    {
+      title: "Regulatory Policies",
+      options: ["Thematic Area 1", "Thematic Area 2", "Thematic Area 3"],
+    },
+  ],
   masterclasses: [
     {
       sector: "Tech",
