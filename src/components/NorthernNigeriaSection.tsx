@@ -3,12 +3,17 @@ import React, { useEffect } from "react";
 const NorthernNigeriaSection = () => {
   useEffect(() => {
     const handleResize = () => {
-      if (window.simplemaps_countrymap_mapdata) {
+      if (
+        window.simplemaps_countrymap_mapdata &&
+        typeof window.simplemaps_countrymap === "function"
+      ) {
+        const mapDiv = document.getElementById("map");
+        if (mapDiv) {
+          mapDiv.innerHTML = "";
+        }
         window.simplemaps_countrymap_mapdata.main_settings.popups =
           window.innerWidth < 768 ? "onClick" : "onHover";
-        if (typeof window.simplemaps_countrymap === "function") {
-          window.simplemaps_countrymap();
-        }
+        window.simplemaps_countrymap();
       }
     };
 
@@ -17,7 +22,9 @@ const NorthernNigeriaSection = () => {
         window.simplemaps_countrymap_mapdata &&
         typeof window.simplemaps_countrymap === "function"
       ) {
-        handleResize();
+        window.simplemaps_countrymap_mapdata.main_settings.popups =
+          window.innerWidth < 768 ? "onClick" : "onHover";
+        window.simplemaps_countrymap();
       }
     };
 
@@ -35,9 +42,17 @@ const NorthernNigeriaSection = () => {
     window.addEventListener("resize", handleResize);
 
     return () => {
-      document.head.removeChild(mapDataScript);
-      document.head.removeChild(countryMapScript);
       window.removeEventListener("resize", handleResize);
+      // Simplemaps library doesn't have a destroy method, so we clear the div
+      const mapDiv = document.getElementById("map");
+      if (mapDiv) {
+        mapDiv.innerHTML = "";
+      }
+      // Remove scripts to avoid duplicates on re-mount (e.g., with React's StrictMode)
+      const scripts = document.querySelectorAll(
+        'script[src*="/map/mapdata.js"], script[src*="/map/countrymap.js"]'
+      );
+      scripts.forEach((s) => s.remove());
     };
   }, []);
 
@@ -54,7 +69,7 @@ const NorthernNigeriaSection = () => {
           </p>
         </div>
 
-        <div className="relative mt-12">
+        <div className="relative mt-12 max-w-5xl mx-auto">
           <div id="map"></div>
         </div>
       </div>
