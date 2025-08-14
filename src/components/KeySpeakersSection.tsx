@@ -4,50 +4,50 @@ const KeySpeakersSection = () => {
       name: "H.E. Bola Ahmed Tinubu, GCFR",
       title: "President, Federal Republic of Nigeria",
       role: "Special Guest of Honour",
-      image: "/images/tinubu.png"
+      image: "/images/tinubu.png",
     },
     {
       name: "Prof. Ango Abdullahi, CON",
       title: "Convener, Northern Elders Forum",
       role: "Convener",
-      image: "/images/profango.png"
+      image: "/images/profango.png",
     },
     {
       name: "Gen. Yakubu Gowon",
       title: "Former Nigerian Head of State",
-      role: "Chairman Opening Ceremony",
-      image: "/images/gowon.webp"
+      role: "Grand Patron Opening Ceremony",
+      image: "/images/gowon.webp",
     },
     {
       name: "Gen. T.Y Danjuma",
       title: "Former Cheif of Army Staff",
-      role: "Alt. Chairman Opening Ceremony",
-      image: "/images/danjuma.jpg"
+      role: "Father of the Day",
+      image: "/images/danjuma.jpg",
     },
     {
       name: "Alhaji Aliko Dangote",
       title: "Chairman, Dangote Group",
       role: "Plenary Chair",
-      image: "/images/aliko.png"
+      image: "/images/aliko.png",
     },
     {
       name: "Dr. Akinwumi Adesina",
       title: "Former Minister of Agriculture and Food Security",
       role: "Keynote Speaker",
-      image: "/images/adesina.png"
+      image: "/images/adesina.png",
     },
     {
       name: "Alhaji Abdulsamad Rabiu",
       title: "Chairman, BUA Group",
-      role: "Technical Report Lead",
-      image: "/images/bua.png"
+      role: "Plenary Chair",
+      image: "/images/bua.png",
     },
     {
-      name: "Chief Audu Ogbeh",
-      title: "Former Minister of Agriculture",
+      name: "Muhammad Sanusi II",
+      title: "Former CBN Governor",
       role: "Industry Expert",
-      image: "/images/Audu-Ogbeh.jpg"
-    }
+      image: "/images/sls.png",
+    },
   ];
 
   return (
@@ -58,17 +58,21 @@ const KeySpeakersSection = () => {
             Distinguished Speakers & Special Guests
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-4">
-            The summit will feature high-level speakers including government officials, 
-            industry leaders, and development partners committed to Northern Nigeria's economic transformation.
+            The summit will feature high-level speakers including government
+            officials, industry leaders, and development partners committed to
+            Northern Nigeria's economic transformation.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {speakers.map((speaker, index) => (
-            <div key={index} className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:shadow-card transition-shadow">
+            <div
+              key={index}
+              className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:shadow-card transition-shadow"
+            >
               <div className="w-16 sm:w-20 h-16 sm:h-20 mx-auto mb-3 sm:mb-4">
-                <img 
-                  src={speaker.image} 
+                <img
+                  src={speaker.image}
                   alt={speaker.name}
                   className="w-full h-full object-cover rounded-full"
                 />

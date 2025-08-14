@@ -22,13 +22,13 @@ const HeroSection = () => {
         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-2xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-white">
             <div className="text-center">
-              <div className="text-xl sm:text-2xl font-bold">September 3-4</div>
+              <div className="text-xl sm:text-2xl font-bold">September 29-30</div>
               <div className="text-xs sm:text-sm opacity-80">2025</div>
             </div>
             <div className="text-center">
               <div className="text-xl sm:text-2xl font-bold">Abuja</div>
               <div className="text-xs sm:text-sm opacity-80">
-                NAF Conference Center
+                Ladi Kwali Hall, Abuja Continental
               </div>
             </div>
             <div className="text-center">

@@ -8,6 +8,7 @@ import SponsorsPartnersSection from "@/components/SponsorsPartnersSection";
 import TickerSection from "@/components/TickerSection";
 import VolunteerSection from "@/components/VolunteerSection";
 import MatchmakingSection from "@/components/MatchmakingSection";
+import NorthernNigeriaSection from "@/components/NorthernNigeriaSection";
 
 const Index = () => {
   return (
@@ -21,6 +22,7 @@ const Index = () => {
       <HighlightsSection />
       <TickerSection />
       <MatchmakingSection />
+      <NorthernNigeriaSection />
       <SponsorsPartnersSection />
       <VolunteerSection />
     </div>
