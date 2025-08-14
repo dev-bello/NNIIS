@@ -9080,7 +9080,7 @@ var simplemaps_countrymap_mapinfo = {
       !e &&
         (ec
           ? (eF.mouseup(tb), ej.mouseup(oA), eq.mouseup(tz), ej.mouseup(oQ))
-          : (eF.hover(tx, t3),
+          : (eF.hover(tx, t3).touchstart(tx),
             eF.click(tb),
             ej.click(oA),
             eq.click(tz),
@@ -9212,11 +9212,17 @@ var simplemaps_countrymap_mapinfo = {
               ? ev.style.setProperty("display", "block")
               : ev.style.setProperty("display", "none"));
         })),
-        eL.hover(tx, t3),
+        eL.mouseover(tx),
+        eL.mouseout(t3),
         eL.click(tb),
-        eD.hover(tw, tk),
+        eD.mouseover(tw),
+        eD.mouseout(tk),
         eD.click(t0),
-        v && (eL.touchend(tb), eL.touchstart(tb), eD.touchend(t0));
+        v &&
+          (eL.touchend(tb),
+          eL.touchstart(tx),
+          eD.touchend(t0),
+          eD.touchstart(tw));
     }
     function oB() {
       if (!(eh.offsetWidth < 1)) {
