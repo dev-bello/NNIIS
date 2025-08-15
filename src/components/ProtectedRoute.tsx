@@ -7,12 +7,16 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      setSession(data.session);
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
       setLoading(false);
+    });
+
+    return () => {
+      subscription.unsubscribe();
     };
-    getSession();
   }, []);
 
   if (loading) {

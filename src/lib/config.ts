@@ -7,6 +7,7 @@ export const config = {
       children: [
         { href: "/exhibition", label: "Sponsor & Exhibit" },
         { href: "/masterclasses", label: "Masterclasses" },
+        { href: "/b2b", label: "B2B Matchmaking" },
       ],
     },
   ],

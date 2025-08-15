@@ -79,7 +79,8 @@ const RegisterPage = () => {
       full_name: `${data["first-name"]} ${data.surname}`,
       phone: data.phone,
       thematic_areas: { ...thematicAreas, ...selectedClasses },
-      type: userType,
+      type: userType === "company" ? "attendee_company" : "attendee_individual",
+      interests: data.interests,
     };
 
     if (userType === "company") {
@@ -106,19 +107,43 @@ const RegisterPage = () => {
     setIsLoading(false);
 
     if (error) {
-      toast.error("Error registering attendee. Please try again.");
+      if (error.message.includes("User already registered")) {
+        toast.error("User already registered. Please login.");
+      } else {
+        toast.error("Error registering attendee. Please try again.");
+      }
     } else {
+      fetch("/api/send-qr", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          record: {
+            email: data.email,
+            full_name: `${data["first-name"]} ${data.surname}`,
+          },
+        }),
+      });
       toast.success(
         "Registration successful! Please check your email to confirm."
       );
       setStep(1);
       setFormData({});
       setSelectedClasses([]);
+      // Reset the form
+      const form = document.querySelector("form");
+      if (form) {
+        form.reset();
+      }
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-4 left-4 bg-green-600 py-1l px-3 text-sm rounded text-white border border-black-600">
+        <a href="/">Back </a>
+      </div>
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -299,7 +324,9 @@ const RegisterPage = () => {
                 </div>
                 <div>
                   <Button type="submit" className="w-full">
-                    {wantsMasterclass ? "Next" : "Submit"}
+                    {userType === "individual" && wantsMasterclass
+                      ? "Next"
+                      : "Submit"}
                   </Button>
                 </div>
               </form>

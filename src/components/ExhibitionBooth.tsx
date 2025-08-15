@@ -47,20 +47,22 @@ const ExhibitionBooth = () => {
 
   return (
     <form
-      className="bg-white p-8 rounded-lg max-w-2xl mx-auto"
+      className="bg-white p-4 sm:p-8 rounded-lg max-w-2xl mx-auto"
       onSubmit={handleSubmit}
     >
       <div className="flex items-center mb-8">
         <img
-          src="/images/arewa.png"
+          src="/images/events/exhibition/exhibition_transparent.PNG"
           alt="Exhibition Booth"
-          className="w-16 h-16 mr-4"
+          className="w-20 h-20 sm:w-28 sm:h-20 mr-1"
         />
-        <h2 className="text-2xl font-bold">Exhibition Booth</h2>
+        <h2 className="text-xl sm:text-2xl font-bold">Exhibition Booth</h2>
       </div>
-      <div className="grid grid-cols-2 gap-8">
-        <div>
-          <Label htmlFor="company-name">Company Name</Label>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+        <div className="space-y-2">
+          <Label htmlFor="company-name">
+            Company Name <span className="text-red-600">*</span>
+          </Label>
           <Input
             id="company-name"
             name="company-name"
@@ -68,8 +70,10 @@ const ExhibitionBooth = () => {
             required
           />
         </div>
-        <div>
-          <Label htmlFor="company-email">Company Email</Label>
+        <div className="space-y-2">
+          <Label htmlFor="company-email">
+            Company Email <span className="text-red-600">*</span>
+          </Label>
           <Input
             id="company-email"
             name="email"
@@ -78,8 +82,10 @@ const ExhibitionBooth = () => {
             required
           />
         </div>
-        <div>
-          <Label htmlFor="industry">Industry *</Label>
+        <div className="space-y-2">
+          <Label htmlFor="industry">
+            Industry <span className="text-red-600">*</span>
+          </Label>
           <Select name="industry" required>
             <SelectTrigger>
               <SelectValue placeholder="Select industry" />
@@ -87,11 +93,14 @@ const ExhibitionBooth = () => {
             <SelectContent>
               <SelectItem value="tech">Technology</SelectItem>
               <SelectItem value="agriculture">Agriculture</SelectItem>
-              <SelectItem value="health">Health</SelectItem>
+              <SelectItem value="power">Power</SelectItem>
+              <SelectItem value="Health">Health</SelectItem>
+              <SelectItem value="infrastructure">Infrastructure</SelectItem>
+              <SelectItem value="other">Other</SelectItem>
             </SelectContent>
           </Select>
         </div>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="website">Website</Label>
           <Input
             id="website"
@@ -112,7 +121,7 @@ const ExhibitionBooth = () => {
       </div>
       <div className="mt-8 flex justify-end">
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Updating..." : "Update"}
+          {isLoading ? "Submitting..." : "Submit"}
         </Button>
       </div>
     </form>

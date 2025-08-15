@@ -14,6 +14,7 @@ import LoginPage from "./pages/Login";
 import VerifyOtpPage from "./pages/VerifyOtp";
 import DashboardPage from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import B2BPage from "./pages/B2B";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,7 @@ const App = () => (
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/exhibition" element={<ExhibitionPage />} />
           <Route path="/masterclasses" element={<MasterclassesPage />} />
-
+          <Route path="/b2b" element={<B2BPage />} />
           <Route path="/volunteer" element={<VolunteerPage />} />
           <Route
             path="/registration-success"

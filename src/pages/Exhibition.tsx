@@ -116,32 +116,12 @@ const ExhibitionPage = () => {
                   </li>
                 </ul>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Audience Profile
-                </h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>
-                    <strong>Investors:</strong> Domestic and international
-                    venture capital, private equity, and institutional investors
-                  </li>
-                  <li>
-                    <strong>Government:</strong> State Governors, Commissioners
-                    of Trade, Investment, Agriculture, and Infrastructure
-                  </li>
-                  <li>
-                    <strong>Development Partners:</strong> AfDB, NEXIM, AFREXIM
-                    and other bilateral agencies
-                  </li>
-                  <li>
-                    <strong>Entrepreneurs & SMEs:</strong> High-growth startups
-                    and scale-ups
-                  </li>
-                  <li>
-                    <strong>Media:</strong> National and international business
-                    press
-                  </li>
-                </ul>
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src="/images/events/exhibition/exhibition.png"
+                  alt="NNIIS Exhibition Booth"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -149,42 +129,46 @@ const ExhibitionPage = () => {
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 text-center">
                 Sponsorship Tiers
               </h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {sponsorshipTiers.map((tier) => (
+              <div className="flex flex-wrap justify-center gap-8">
+                {sponsorshipTiers.map((tier, index) => (
                   <div
                     key={tier.name}
-                    className="border rounded-lg p-6 flex flex-col shadow-lg hover:shadow-2xl transition-shadow"
+                    className={`bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 w-full max-w-sm flex flex-col ${
+                      index === 0 ? "border-4 border-nigeria-green" : ""
+                    }`}
                   >
-                    <h3 className="text-2xl font-bold text-primary mb-2">
+                    <h3 className="text-3xl font-bold text-gray-900 text-center mb-4">
                       {tier.name}
                     </h3>
-                    <p className="text-xl font-semibold text-gray-800 mb-4">
+                    <p className="text-2xl font-semibold text-gray-700 text-center mb-6">
                       {tier.investment}
                     </p>
-                    <ul className="space-y-3 text-gray-600 flex-grow">
-                      <li>
-                        <strong>Speaking Slot:</strong> {tier.speakingSlot}
-                      </li>
-                      <li>
-                        <strong>Branding:</strong> {tier.branding}
-                      </li>
-                      <li>
-                        <strong>Exhibition Booth:</strong> {tier.booth}
-                      </li>
-                      <li>
-                        <strong>Delegate Passes:</strong> {tier.passes}
-                      </li>
-                      <li>
-                        <strong>Media Coverage:</strong> {tier.media}
-                      </li>
-                      <li>
-                        <strong>Advert in Brochure:</strong> {tier.advert}
-                      </li>
-                      <li>
-                        <strong>Sponsored Side Event:</strong> {tier.sideEvent}
-                      </li>
+                    <ul className="space-y-4 text-gray-600 flex-grow mb-8">
+                      {[
+                        { label: "Speaking Slot", value: tier.speakingSlot },
+                        { label: "Branding", value: tier.branding },
+                        { label: "Exhibition Booth", value: tier.booth },
+                        { label: "Delegate Passes", value: tier.passes },
+                        { label: "Media Coverage", value: tier.media },
+                        { label: "Advert in Brochure", value: tier.advert },
+                        {
+                          label: "Sponsored Side Event",
+                          value: tier.sideEvent,
+                        },
+                      ].map((item) => (
+                        <li key={item.label} className="flex items-center">
+                          <span className="text-nigeria-green mr-3">✔</span>
+                          <span>
+                            <strong>{item.label}:</strong> {item.value}
+                          </span>
+                        </li>
+                      ))}
                     </ul>
-                    <Button asChild size="lg" className="mt-6 w-full">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="w-full mt-auto bg-nigeria-green hover:bg-nigeria-green/90"
+                    >
                       <a
                         href={`/register?type=exhibitor&tier=${tier.name
                           .split(" ")[0]

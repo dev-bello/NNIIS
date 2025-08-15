@@ -6,6 +6,21 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import ExhibitionBooth from "@/components/ExhibitionBooth";
+import { config } from "@/lib/config";
+
+function getCountdownToSept29() {
+  const targetDate = new Date("2025-09-29T00:00:00");
+  const now = new Date();
+  const timeDiff = targetDate.getTime() - now.getTime();
+
+  const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+
+  return `${days} Days`;
+}
+const countdownToEvent = getCountdownToSept29();
 
 const DashboardPage = () => {
   const [user, setUser] = useState<any>(null);
@@ -15,95 +30,106 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
+      setLoading(true);
       const {
         data: { session },
       } = await supabase.auth.getSession();
-      if (session) {
-        const { data: userData, error } = await supabase
-          .from("attendees")
-          .select("*")
-          .eq("id", session.user.id)
-          .single();
 
-        if (error) {
-          const { data: exhibitorData, error: exhibitorError } = await supabase
-            .from("exhibitors")
-            .select("*")
-            .eq("id", session.user.id)
-            .single();
-          if (exhibitorError) {
-            toast.error("Error fetching user data.");
-          } else {
-            setUser(exhibitorData);
-          }
+      if (session?.user) {
+        const userProfile = {
+          ...session.user.user_metadata,
+          email: session.user.email,
+          id: session.user.id,
+        };
+        setUser(userProfile);
+
+        const thematicAreasData = session.user.user_metadata.thematic_areas;
+        if (
+          thematicAreasData &&
+          typeof thematicAreasData === "object" &&
+          !Array.isArray(thematicAreasData)
+        ) {
+          const thematicAreasArray = Object.keys(thematicAreasData).filter(
+            (key) => thematicAreasData[key] === "on"
+          );
+          const selectedClassesArray = Object.values(thematicAreasData).filter(
+            (value): value is string =>
+              typeof value === "string" && value !== "on"
+          );
+          setSelectedClasses([...thematicAreasArray, ...selectedClassesArray]);
+        } else if (Array.isArray(thematicAreasData)) {
+          setSelectedClasses(thematicAreasData);
         } else {
-          setUser(userData);
-          setSelectedClasses(userData.thematic_areas || []);
+          setSelectedClasses([]);
         }
       } else {
         toast.error("You must be logged in to view this page.");
+        setUser(null);
       }
       setLoading(false);
     };
+
     fetchUser();
   }, []);
 
-  const handleClassChange = (className: string) => {
-    setSelectedClasses((prev) =>
-      prev.includes(className)
-        ? prev.filter((c) => c !== className)
-        : [...prev, className]
-    );
-  };
+  const handleClassChange = async (className: string) => {
+    const newSelectedClasses = selectedClasses.includes(className)
+      ? selectedClasses.filter((c) => c !== className)
+      : [...selectedClasses, className];
 
-  const handleUpdateData = async () => {
+    setSelectedClasses(newSelectedClasses);
+
     const {
       data: { session },
     } = await supabase.auth.getSession();
     if (session) {
-      if (user.type === "exhibitor") {
-        // Exhibitor update logic here
+      const { error } = await supabase.auth.updateUser({
+        data: { thematic_areas: newSelectedClasses },
+      });
+
+      if (error) {
+        toast.error("Error updating data. Please try again.");
       } else {
-        const { error } = await supabase
-          .from("attendees")
-          .update({ thematic_areas: selectedClasses })
-          .eq("id", session.user.id);
-        if (error) {
-          toast.error("Error updating data. Please try again.");
-        } else {
-          toast.success("Data updated successfully!");
-        }
+        toast.success("Data updated successfully!");
       }
     }
   };
 
-  const masterclasses = {
-    selected: [
-      "From Bootstrapped to Bankrolled: Mastering Startup Funding, Financial Management & Investor Readiness",
-      "From Visibility to Viability: Mastering Marketing, Branding & Strategic Partnerships for Startup Growth",
-      "From Free to Fee: Leveraging Technology & Digital Payments to Drive Business Growth and Monetize Your Startup",
-    ],
-    all: [
-      "From Visibility to Viability: Mastering Marketing, Branding & Strategic Partnerships for Startup Growth",
-      "From Bootstrapped to Bankrolled: Mastering Startup Funding, Financial Management & Investor Readiness",
-      "From Free to Fee: Leveraging Technology & Digital Payments to Drive Business Growth and Monetize Your Startup",
-      "Product Development & Market Fit - Designing products/services that solve real problems and attract users.",
-      "Talent Acquisition & Retention in a Competitive Market",
-      "Navigating Government Policies & Regulations – Understanding local business laws, taxes, and compliance.",
-      "Ecosystem Hacking: How Founders Can Thrive Despite Fragmented Support Systems",
-      "Building in the Trenches: Navigating Early-Stage Startup Struggles in Emerging Ecosystems",
-    ],
-  };
+  const allSelectableItems = [
+    ...config.thematicAreas.map((area) => area.title),
+    ...config.masterclasses.map((mc) => mc.title),
+  ];
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div>
+          <p>Could not load user profile.</p>
+          <p>Please contact support.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <aside className="w-1/4 bg-white p-8">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
+      <aside className="w-full md:w-1/4 bg-white p-8">
         <div className="flex flex-col items-center">
           <div className="mb-2">
             <img src="/images/NNIIS.jpg" alt="Arewa Tech Fest" />
           </div>
           <h1 className="text-2xl font-bold">
-            Hello! {user?.full_name?.split(" ")[0]}
+            Hello!{" "}
+            {user?.full_name?.split(" ")[0] ||
+              user?.company_name?.split(" ")[0]}
           </h1>
           <p className="text-gray-600">
             Thank you for registering for the
@@ -116,9 +142,18 @@ const DashboardPage = () => {
         <div className="mt-8">
           <h2 className="font-semibold">Your registration details</h2>
           <div className="mt-4 space-y-2">
-            <p>
-              <span className="font-semibold">Full Name</span> {user?.full_name}
-            </p>
+            {user?.full_name && (
+              <p>
+                <span className="font-semibold">Full Name</span>{" "}
+                {user.full_name}
+              </p>
+            )}
+            {user?.company_name && (
+              <p>
+                <span className="font-semibold">Company Name</span>{" "}
+                {user?.company_name}
+              </p>
+            )}
             <p>
               <span className="font-semibold">Email</span> {user?.email}
             </p>
@@ -140,13 +175,16 @@ const DashboardPage = () => {
           </p>
         </div>
       </aside>
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-4 md:p-8">
         <div className="flex justify-between items-center mb-8">
           <div className="text-lg font-bold text-green-600">
-            {/* {countdown}  */} DAYS to Northern Nigeria Investment and
-            Industrialisation Summit 2025
+            <span className="bg-green-600 text-white border-b-2 border-green-500 rounded p-1">
+              {countdownToEvent}
+            </span>{" "}
+            till the Northern Nigeria Investment and Industrialisation Summit
+            2025
           </div>
-          <div>#NNIIS25</div>
+          <div className="text-gray-500">#NNIIS25</div>
         </div>
         <div className="bg-white p-8 rounded-lg">
           <div className="flex border-b">
@@ -174,14 +212,19 @@ const DashboardPage = () => {
           {activeTab === "masterclass" ? (
             <>
               <div className="mt-8">
-                <h3 className="text-xl font-bold">Selected</h3>
+                <h3 className="text-xl font-bold">
+                  Masterclasses & Thematic Areas
+                </h3>
                 <div className="mt-4 space-y-2">
-                  {selectedClasses.map((item) => (
+                  {allSelectableItems.map((item) => (
                     <div key={item} className="flex items-center">
                       <Checkbox
-                        checked
                         id={item}
                         onCheckedChange={() => handleClassChange(item)}
+                        checked={
+                          Array.isArray(selectedClasses) &&
+                          selectedClasses.includes(item)
+                        }
                       />
                       <Label htmlFor={item} className="ml-2">
                         {item}
@@ -190,28 +233,8 @@ const DashboardPage = () => {
                   ))}
                 </div>
                 <p className="mt-4 text-sm text-gray-500">
-                  You can only select a maximum of 3 masterclasses at a time
+                  You can only select a maximum of 4 masterclasses at a time
                 </p>
-              </div>
-              <div className="mt-8">
-                <h3 className="text-xl font-bold">All</h3>
-                <div className="mt-4 space-y-2">
-                  {masterclasses.all.map((item) => (
-                    <div key={item} className="flex items-center">
-                      <Checkbox
-                        id={item}
-                        onCheckedChange={() => handleClassChange(item)}
-                        checked={selectedClasses.includes(item)}
-                      />
-                      <Label htmlFor={item} className="ml-2">
-                        {item}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-8 flex justify-end">
-                <Button onClick={handleUpdateData}>Update Data</Button>
               </div>
             </>
           ) : (
