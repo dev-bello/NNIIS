@@ -10,7 +10,10 @@ import ExhibitionPage from "./pages/Exhibition";
 import MasterclassesPage from "./pages/Masterclasses";
 import VolunteerPage from "./pages/Volunteer";
 import RegistrationSuccessPage from "./pages/RegistrationSuccess";
-import RetrieveQrPage from "./pages/RetrieveQr";
+import LoginPage from "./pages/Login";
+import VerifyOtpPage from "./pages/VerifyOtp";
+import DashboardPage from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -31,8 +34,16 @@ const App = () => (
             path="/registration-success"
             element={<RegistrationSuccessPage />}
           />
-          <Route path="/retrieve-qr" element={<RetrieveQrPage />} />
-          <Route path="/retrieve-qr/:id" element={<RetrieveQrPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/verify-otp" element={<VerifyOtpPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

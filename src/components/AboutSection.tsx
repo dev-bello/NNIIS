@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 
 const AboutSection = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden">
+    <section
+      id="about"
+      className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden"
+    >
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-nigeria-green/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>

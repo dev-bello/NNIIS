@@ -5,11 +5,29 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { config } from "@/lib/config";
+import { supabase } from "@/lib/supabase";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [session, setSession] = useState<any>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      setSession(data.session);
+    };
+    getSession();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setSession(null);
+    navigate("/");
+  };
 
   return (
     <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -68,13 +86,19 @@ const Header = () => {
 
           {/* Desktop Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button
-              variant="outline"
-              size="default"
-              onClick={() => (window.location.href = "/retrieve-qr")}
-            >
-              Already Registered?
-            </Button>
+            {session ? (
+              <Button variant="outline" size="default" onClick={handleLogout}>
+                Logout
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                size="default"
+                onClick={() => (window.location.href = "/login")}
+              >
+                Already Registered?
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -143,14 +167,25 @@ const Header = () => {
               )}
             </nav>
             <div className="flex flex-col space-y-3 pt-4">
-              <Button
-                variant="outline"
-                size="default"
-                className="w-full"
-                onClick={() => (window.location.href = "/retrieve-qr")}
-              >
-                Already Registered?
-              </Button>
+              {session ? (
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="w-full"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="w-full"
+                  onClick={() => (window.location.href = "/login")}
+                >
+                  Already Registered?
+                </Button>
+              )}
             </div>
           </div>
         )}
