@@ -63,7 +63,10 @@ const NorthernNigeriaSection = () => {
           </h2>
           <p className="mt-5 text-lg font-normal text-gray-600 sm:text-xl font-pj">
             Explore the vast potential for investment across various sectors in
-            Northern Nigeria.
+            Northern Nigeria.{" "}
+            <span className="font-semibold text-sm/6 text-[#d4d4d4] sm:hidden">
+              Double tap to view
+            </span>
           </p>
         </div>
 

@@ -21,7 +21,7 @@ const Index = () => {
       <KeySpeakersSection />
       <HighlightsSection />
       <TickerSection />
-      <MatchmakingSection />
+      {/* <MatchmakingSection /> */}
       <NorthernNigeriaSection />
       <SponsorsPartnersSection />
       <VolunteerSection />
