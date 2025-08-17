@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 const sponsorshipTiers = [
   {
     name: "Platinum Sponsor",
-    investment: "₦200,000,000",
+    investment: "₦100,000,000",
     speakingSlot: "Keynote & Panel",
     branding: "Premium Placement",
     booth: "6x6m (Prime)",
     passes: 10,
-    media: "Featured Interview",
+    media: "Interview Limit",
     advert: "Full Page",
     sideEvent: "Yes",
   },
   {
     name: "Gold Sponsor",
-    investment: "₦150,000,000",
+    investment: "₦70,000,000",
     speakingSlot: "Panel",
     branding: "High Placement",
     booth: "4x4m",
@@ -26,18 +26,18 @@ const sponsorshipTiers = [
   },
   {
     name: "Silver Sponsor",
-    investment: "₦100,500,000",
+    investment: "₦50,000,000",
     speakingSlot: "Breakout Session",
     branding: "Standard Placement",
     booth: "3x3m",
     passes: 4,
-    media: "Mention",
+    media: "Name Listing",
     advert: "Half Page",
     sideEvent: "No",
   },
   {
     name: "Exhibitor",
-    investment: "₦50,000,000",
+    investment: "₦20,000,000",
     speakingSlot: "No",
     branding: "Booth Signage",
     booth: "2x2m",
@@ -199,7 +199,7 @@ const ExhibitionPage = () => {
                 To reserve your sponsorship slot or request a custom package:
               </p>
               <p className="text-gray-800 font-semibold mt-2">
-                Email: infoarewa@gmail.com
+                Email: support@mapinng.com
               </p>
               <p className="text-gray-800 font-semibold">
                 Tel: +234 7034131908

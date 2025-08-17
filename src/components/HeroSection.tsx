@@ -76,7 +76,8 @@ const HeroSection = () => {
         </div>
 
         <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-          Unlocking Strategic Opportunities in Mining, Agriculture, and Power
+          Unlocking Strategic Opportunities in Mining, Agriculture, and Power.
+          <span className="text-red-600  font-bold">(MAP) </span>
         </p>
 
         {/* Event Info */}

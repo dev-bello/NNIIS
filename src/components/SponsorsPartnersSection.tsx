@@ -52,6 +52,10 @@ const SponsorsPartnersSection = () => {
       logo: "/images/logos/COA.png",
     },
     {
+      name: "Voxcle Solutions",
+      logo: "/images/logos/voxcle.png",
+    },
+    {
       name: "Nigerian Stock Exchange",
       logo: "/images/logos/COA.png",
     },
@@ -109,12 +113,12 @@ const SponsorsPartnersSection = () => {
         </div>
 
         {/* Sponsors Section */}
-        <div className="mb-12 sm:mb-16 md:mb-20">
+        <div className="mb-8">
           <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-8">
             Our Sponsors
           </h3>
           <div
-            className="relative h-48 sm:h-56 md:h-64 overflow-hidden"
+            className="relative h-48 overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -124,7 +128,7 @@ const SponsorsPartnersSection = () => {
               return (
                 <div
                   key={`sponsor-1-${index}`}
-                  className="absolute top-1/2 transform -translate-y-1/2"
+                  className="absolute top-0"
                   style={{
                     transform: `translateX(${pos.x}px)`,
                     left: "0",
@@ -155,7 +159,7 @@ const SponsorsPartnersSection = () => {
               return (
                 <div
                   key={`sponsor-2-${index}`}
-                  className="absolute top-1/2 transform -translate-y-1/2"
+                  className="absolute top-0"
                   style={{
                     transform: `translateX(${
                       pos.x + sponsors.length * (isMobile ? 180 : 220)
@@ -190,7 +194,7 @@ const SponsorsPartnersSection = () => {
             Our Partners
           </h3>
           <div
-            className="relative h-48 sm:h-56 md:h-64 overflow-hidden"
+            className="relative h-48 overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -200,7 +204,7 @@ const SponsorsPartnersSection = () => {
               return (
                 <div
                   key={`partner-1-${index}`}
-                  className="absolute top-1/2 transform -translate-y-1/2"
+                  className="absolute top-0"
                   style={{
                     transform: `translateX(${pos.x}px)`,
                     left: "0",
@@ -231,7 +235,7 @@ const SponsorsPartnersSection = () => {
               return (
                 <div
                   key={`partner-2-${index}`}
-                  className="absolute top-1/2 transform -translate-y-1/2"
+                  className="absolute top-0"
                   style={{
                     transform: `translateX(${
                       pos.x + partners.length * (isMobile ? 180 : 220)

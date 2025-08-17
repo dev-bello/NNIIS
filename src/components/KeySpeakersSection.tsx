@@ -15,13 +15,13 @@ const KeySpeakersSection = () => {
     {
       name: "Gen. Yakubu Gowon",
       title: "Former Nigerian Head of State",
-      role: "Grand Patron Opening Ceremony",
+      role: "Father of the Day",
       image: "/images/gowon.webp",
     },
     {
       name: "Gen. T.Y Danjuma",
       title: "Former Cheif of Army Staff",
-      role: "Father of the Day",
+      role: "Grand Patron Opening Ceremony",
       image: "/images/danjuma.jpg",
     },
     {
@@ -32,7 +32,8 @@ const KeySpeakersSection = () => {
     },
     {
       name: "Dr. Akinwumi Adesina",
-      title: "Former Minister of Agriculture and Food Security",
+      title:
+        "Former Minister of Agriculture and Food Security/ Former President AFDB",
       role: "Keynote Speaker",
       image: "/images/adesina.png",
     },
