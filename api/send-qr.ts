@@ -1,13 +1,11 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { Resend } from "resend";
-import QRCode from "qrcode";
+// Use require for runtime dependencies to ensure CommonJS compatibility
+const { Resend } = require("resend");
+const QRCode = require("qrcode");
 
 const resend = new Resend(process.env.VITE_RESEND_API_KEY);
 
-export default async function handler(
-  request: VercelRequest,
-  response: VercelResponse
-) {
+const handler = async (request: VercelRequest, response: VercelResponse) => {
   console.log("send-qr function called");
   try {
     const { record } = request.body;
@@ -47,4 +45,7 @@ export default async function handler(
     console.error("Error in send-qr function:", error);
     response.status(500).send("Error sending QR code email.");
   }
-}
+};
+
+// Use module.exports for the handler
+module.exports = handler;
