@@ -1,11 +1,13 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-// Use require for runtime dependencies to ensure CommonJS compatibility
-const { Resend } = require("resend");
+import { Resend } from "resend";
 
 const resend = new Resend(process.env.VITE_RESEND_API_KEY);
 const NOTIFICATION_EMAIL = "your-email@example.com"; // Replace with your email
 
-const handler = async (request: VercelRequest, response: VercelResponse) => {
+export default async function handler(
+  request: VercelRequest,
+  response: VercelResponse
+) {
   try {
     const { record } = request.body;
     const {
@@ -39,7 +41,4 @@ const handler = async (request: VercelRequest, response: VercelResponse) => {
     console.error("Error in send-volunteer-notification function:", error);
     response.status(500).send("Error sending notification email.");
   }
-};
-
-// Use module.exports for the handler
-module.exports = handler;
+}
