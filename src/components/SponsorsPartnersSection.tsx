@@ -53,7 +53,7 @@ const SponsorsPartnersSection = () => {
     },
     {
       name: "Voxcle Solutions",
-      logo: "/images/logos/voxcle.png",
+      logo: "/images/logos/voxcle.jpg",
     },
     {
       name: "Nigerian Stock Exchange",

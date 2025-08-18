@@ -97,9 +97,7 @@ const HeroSection = () => {
             </div>
             <div className="text-center">
               <div className="text-xl sm:text-2xl font-bold">NNIIS</div>
-              <div className="text-xs sm:text-sm opacity-80">
-                Investment Summit
-              </div>
+              <div className="text-xs sm:text-sm opacity-80">MAP Summit</div>
             </div>
           </div>
         </div>
