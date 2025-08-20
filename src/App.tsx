@@ -15,6 +15,7 @@ import VerifyOtpPage from "./pages/VerifyOtp";
 import DashboardPage from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import B2BPage from "./pages/B2B";
+import StateDetailPage from "./pages/StateDetail";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/exhibition" element={<ExhibitionPage />} />
-          <Route path="/masterclasses" element={<MasterclassesPage />} />
+          {/* <Route path="/masterclasses" element={<MasterclassesPage />} /> */}
           <Route path="/b2b" element={<B2BPage />} />
           <Route path="/volunteer" element={<VolunteerPage />} />
           <Route
@@ -37,6 +38,7 @@ const App = () => (
           />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/verify-otp" element={<VerifyOtpPage />} />
+          <Route path="/state/:slug" element={<StateDetailPage />} />
           <Route
             path="/dashboard"
             element={

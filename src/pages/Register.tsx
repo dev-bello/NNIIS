@@ -310,7 +310,7 @@ const RegisterPage = () => {
                   />
                   {userType === "individual" && (
                     <div className="flex items-center">
-                      <Checkbox
+                      {/* <Checkbox
                         id="wants-masterclass"
                         onCheckedChange={() =>
                           setWantsMasterclass(!wantsMasterclass)
@@ -318,7 +318,7 @@ const RegisterPage = () => {
                       />
                       <Label htmlFor="wants-masterclass" className="ml-2">
                         Masterclass
-                      </Label>
+                      </Label> */}
                     </div>
                   )}
                 </div>

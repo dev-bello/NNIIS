@@ -11,7 +11,7 @@ const NorthernNigeriaSection = () => {
         if (mapDiv) {
           mapDiv.innerHTML = "";
         }
-        window.simplemaps_countrymap_mapdata.main_settings.popups = "detect";
+        window.simplemaps_countrymap_mapdata.main_settings.popups = "on_click";
         window.simplemaps_countrymap();
       }
     };
@@ -21,7 +21,7 @@ const NorthernNigeriaSection = () => {
         window.simplemaps_countrymap_mapdata &&
         typeof window.simplemaps_countrymap === "function"
       ) {
-        window.simplemaps_countrymap_mapdata.main_settings.popups = "detect";
+        window.simplemaps_countrymap_mapdata.main_settings.popups = "on_click";
         window.simplemaps_countrymap();
       }
     };

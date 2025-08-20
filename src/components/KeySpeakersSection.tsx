@@ -49,6 +49,12 @@ const KeySpeakersSection = () => {
       role: "Industry Expert",
       image: "/images/sls.png",
     },
+    {
+      name: "Professor Babakalli Alkali",
+      title: `Head of Mechanical Engineering and Professor of Maintenance and Reliability Engineering, Glasgow Caledonian University`,
+      role: "Industry Expert",
+      image: "/images/babakalli.jpg",
+    },
   ];
 
   return (

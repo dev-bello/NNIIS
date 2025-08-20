@@ -397,7 +397,8 @@ var simplemaps_countrymap_mapdata = {
     NGAD: {
       name: "Adamawa",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Large-scale agriculture (rice, maize, cotton).<br/>- Livestock farming and processing.<br/>- Solid minerals exploration (bentonite, gypsum).",
+        "<strong>Investment Opportunities:</strong><br/>- Large-scale agriculture (rice, maize, cotton).<br/>- Livestock farming and processing.<br/>- Solid minerals exploration (bentonite, gypsum).<br/><div style='margin-top:8px'><a href='/state/adamawa' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/adamawa",
     },
     NGAK: {
       color: "#fff",
@@ -410,17 +411,20 @@ var simplemaps_countrymap_mapdata = {
     NGBA: {
       name: "Bauchi",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Tourism and hospitality (Yankari Game Reserve).<br/>- Solid minerals (kaolin, gypsum, limestone).<br/>- Agro-processing (groundnuts, millet).",
+        "<strong>Investment Opportunities:</strong><br/>- Tourism and hospitality (Yankari Game Reserve).<br/>- Solid minerals (kaolin, gypsum, limestone).<br/>- Agro-processing (groundnuts, millet).<br/><div style='margin-top:8px'><a href='/state/bauchi' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/bauchi",
     },
     NGBE: {
       name: "Benue",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Fruit juice processing (mangoes, oranges).<br/>- Cassava and yam processing.<br/>- Coal and limestone mining.",
+        "<strong>Investment Opportunities:</strong><br/>- Fruit juice processing (mangoes, oranges).<br/>- Cassava and yam processing.<br/>- Coal and limestone mining.<br/><div style='margin-top:8px'><a href='/state/benue' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/benue",
     },
     NGBO: {
       name: "Borno",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Gum arabic production and processing.<br/>- Livestock and fisheries.<br/>- Renewable energy (solar).",
+        "<strong>Investment Opportunities:</strong><br/>- Gum arabic production and processing.<br/>- Livestock and fisheries.<br/>- Renewable energy (solar).<br/><div style='margin-top:8px'><a href='/state/borno' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/borno",
     },
     NGBY: {
       color: "#fff",
@@ -453,12 +457,14 @@ var simplemaps_countrymap_mapdata = {
     NGFC: {
       name: "Federal Capital Territory",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Real estate and infrastructure development.<br/>- ICT and business process outsourcing.<br/>- Tourism and hospitality.",
+        "<strong>Investment Opportunities:</strong><br/>- Real estate and infrastructure development.<br/>- ICT and business process outsourcing.<br/>- Tourism and hospitality.<br/><div style='margin-top:8px'><a href='/state/fct' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/fct",
     },
     NGGO: {
       name: "Gombe",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Cement production (limestone).<br/>- Cotton ginning and textile manufacturing.<br/>- Tomato and pepper processing.",
+        "<strong>Investment Opportunities:</strong><br/>- Cement production (limestone).<br/>- Cotton ginning and textile manufacturing.<br/>- Tomato and pepper processing.<br/><div style='margin-top:8px'><a href='/state/gombe' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/gombe",
     },
     NGIM: {
       color: "#fff",
@@ -467,37 +473,44 @@ var simplemaps_countrymap_mapdata = {
     NGJI: {
       name: "Jigawa",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Sesame seed and hibiscus processing.<br/>- ICT and knowledge-based industries.<br/>- Date farming and processing.",
+        "<strong>Investment Opportunities:</strong><br/>- Sesame seed and hibiscus processing.<br/>- ICT and knowledge-based industries.<br/>- Date farming and processing.<br/><div style='margin-top:8px'><a href='/state/jigawa' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/jigawa",
     },
     NGKD: {
       name: "Kaduna",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Textile and garment manufacturing.<br/>- Ginger processing and export.<br/>- ICT and innovation hubs.",
+        "<strong>Investment Opportunities:</strong><br/>- Textile and garment manufacturing.<br/>- Ginger processing and export.<br/>- ICT and innovation hubs.<br/><div style='margin-top:8px'><a href='/state/kaduna' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/kaduna",
     },
     NGKE: {
       name: "Kebbi",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Rice milling and processing.<br/>- Onion and garlic farming and export.<br/>- Gold mining and processing.",
+        "<strong>Investment Opportunities:</strong><br/>- Rice milling and processing.<br/>- Onion and garlic farming and export.<br/>- Gold mining and processing.<br/><div style='margin-top:8px'><a href='/state/kebbi' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/kebbi",
     },
     NGKN: {
       name: "Kano",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Leather tanning and footwear manufacturing.<br/>- Agro-commodities trading and export.<br/>- Film and entertainment industry (Kannywood).",
+        "<strong>Investment Opportunities:</strong><br/>- Leather tanning and footwear manufacturing.<br/>- Agro-commodities trading and export.<br/>- Film and entertainment industry (Kannywood).<br/><div style='margin-top:8px'><a href='/state/kano' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/kano",
     },
     NGKO: {
       name: "Kogi",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Iron and steel production.<br/>- Cashew processing and export.<br/>- Inland port and logistics services.",
+        "<strong>Investment Opportunities:</strong><br/>- Iron and steel production.<br/>- Cashew processing and export.<br/>- Inland port and logistics services.<br/><div style='margin-top:8px'><a href='/state/kogi' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/kogi",
     },
     NGKT: {
       name: "Katsina",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Cotton farming and ginning.<br/>- Sugarcane cultivation and processing.<br/>- Wind and solar energy projects.",
+        "<strong>Investment Opportunities:</strong><br/>- Cotton farming and ginning.<br/>- Sugarcane cultivation and processing.<br/>- Wind and solar energy projects.<br/><div style='margin-top:8px'><a href='/state/katsina' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/katsina",
     },
     NGKW: {
       name: "Kwara",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Sugarcane and cassava processing.<br/>- Solid minerals (marble, granite).<br/>- Education and healthcare services.",
+        "<strong>Investment Opportunities:</strong><br/>- Sugarcane and cassava processing.<br/>- Solid minerals (marble, granite).<br/>- Education and healthcare services.<br/><div style='margin-top:8px'><a href='/state/kwara' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/kwara",
     },
     NGLA: {
       color: "#fff",
@@ -506,12 +519,14 @@ var simplemaps_countrymap_mapdata = {
     NGNA: {
       name: "Nassarawa",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Solid minerals (barite, salt).<br/>- Sesame and melon seed processing.<br/>- Proximity to Abuja for real estate.",
+        "<strong>Investment Opportunities:</strong><br/>- Solid minerals (barite, salt).<br/>- Sesame and melon seed processing.<br/>- Proximity to Abuja for real estate.<br/><div style='margin-top:8px'><a href='/state/nasarawa' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/nasarawa",
     },
     NGNI: {
       name: "Niger",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Shea butter processing and export.<br/>- Hydroelectric power generation.<br/>- Gold and talc mining.",
+        "<strong>Investment Opportunities:</strong><br/>- Shea butter processing and export.<br/>- Hydroelectric power generation.<br/>- Gold and talc mining.<br/><div style='margin-top:8px'><a href='/state/niger' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/niger",
     },
     NGOG: {
       color: "#fff",
@@ -532,7 +547,8 @@ var simplemaps_countrymap_mapdata = {
     NGPL: {
       name: "Plateau",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Tin and columbite mining.<br/>- Potato and vegetable farming.<br/>- Tourism and hospitality.",
+        "<strong>Investment Opportunities:</strong><br/>- Tin and columbite mining.<br/>- Potato and vegetable farming.<br/>- Tourism and hospitality.<br/><div style='margin-top:8px'><a href='/state/plateau' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/plateau",
     },
     NGRI: {
       color: "#fff",
@@ -541,22 +557,26 @@ var simplemaps_countrymap_mapdata = {
     NGSO: {
       name: "Sokoto",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Leather tanning and export.<br/>- Onion and garlic farming.<br/>- Phosphate and limestone mining.",
+        "<strong>Investment Opportunities:</strong><br/>- Leather tanning and export.<br/>- Onion and garlic farming.<br/>- Phosphate and limestone mining.<br/><div style='margin-top:8px'><a href='/state/sokoto' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/sokoto",
     },
     NGTA: {
       name: "Taraba",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Tea and coffee plantations.<br/>- Highland agriculture (fruits, vegetables).<br/>- Gemstone mining (sapphire, tourmaline).",
+        "<strong>Investment Opportunities:</strong><br/>- Tea and coffee plantations.<br/>- Highland agriculture (fruits, vegetables).<br/>- Gemstone mining (sapphire, tourmaline).<br/><div style='margin-top:8px'><a href='/state/taraba' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/taraba",
     },
     NGYO: {
       name: "Yobe",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Potash and gypsum mining.<br/>- Sesame and groundnut processing.<br/>- Livestock and dairy farming.",
+        "<strong>Investment Opportunities:</strong><br/>- Potash and gypsum mining.<br/>- Sesame and groundnut processing.<br/>- Livestock and dairy farming.<br/><div style='margin-top:8px'><a href='/state/yobe' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/yobe",
     },
     NGZA: {
       name: "Zamfara",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Gold mining and processing.<br/>- Cotton and tobacco farming.<br/>- Livestock and meat processing.",
+        "<strong>Investment Opportunities:</strong><br/>- Gold mining and processing.<br/>- Cotton and tobacco farming.<br/>- Livestock and meat processing.<br/><div style='margin-top:8px'><a href='/state/zamfara' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      url: "/state/zamfara",
     },
   },
   locations: {
