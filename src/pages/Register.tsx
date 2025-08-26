@@ -8,21 +8,19 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import ExhibitionBooth from "@/components/ExhibitionBooth";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 type FormData = {
-  "first-name"?: string;
-  surname?: string;
+  "full-name"?: string;
   email?: string;
   phone?: string;
   organization?: string;
-  "job-title"?: string;
-  "company-name"?: string;
-  "industry-type"?: string;
-  website?: string;
-  socials?: string;
-  "contact-person"?: string;
-  "contact-person-role"?: string;
-  interests?: string[];
+  role?: string;
+  "sector-of-focus"?: string;
+  "user-type-selection"?: string;
+  impact?: string;
+  "why-attend"?: string;
   [key: string]: any;
 };
 
@@ -35,6 +33,22 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState<FormData>({});
   const [userType, setUserType] = useState("individual");
   const [wantsMasterclass, setWantsMasterclass] = useState(false);
+  const [paragraphValues, setParagraphValues] = useState({
+    impact: "",
+    "why-attend": "",
+  });
+
+  const handleParagraphChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    const words = value.split(/\s+/).filter(Boolean);
+
+    if (words.length > 100) {
+      const truncated = words.slice(0, 100).join(" ");
+      setParagraphValues((prev) => ({ ...prev, [name]: truncated }));
+    } else {
+      setParagraphValues((prev) => ({ ...prev, [name]: value }));
+    }
+  };
 
   const handleClassChange = (className: string) => {
     setSelectedClasses((prev) =>
@@ -57,7 +71,15 @@ const RegisterPage = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     const interests = formData.getAll("interests") as string[];
-    const newData = { ...data, interests };
+
+    // Include the controlled textarea values
+    const newData = {
+      ...data,
+      interests,
+      impact: paragraphValues.impact,
+      "why-attend": paragraphValues["why-attend"],
+    };
+
     setFormData(newData);
     if (wantsMasterclass) {
       setStep(2);
@@ -68,74 +90,100 @@ const RegisterPage = () => {
 
   const handleAttendeeSubmit = async (data: FormData) => {
     setIsLoading(true);
-    const thematicAreas = config.thematicAreas.reduce((acc, area) => {
-      if (data[area.title]) {
-        return { ...acc, [area.title]: data[area.title] };
-      }
-      return acc;
-    }, {});
 
-    let submissionData: any = {
-      full_name: `${data["first-name"]} ${data.surname}`,
+    const submissionData: any = {
+      full_name: data["full-name"],
+      email: data.email,
       phone: data.phone,
-      thematic_areas: { ...thematicAreas, ...selectedClasses },
-      type: userType === "company" ? "attendee_company" : "attendee_individual",
-      interests: data.interests,
+      organization: data.organization,
+      role: data.role,
+      sector_of_focus: data["sector-of-focus"],
+      user_type_selection: data["user-type-selection"],
+      impact: data.impact,
+      why_attend: data["why-attend"],
     };
 
-    if (userType === "company") {
-      submissionData = {
-        ...submissionData,
-        company_name: data["company-name"],
-        industry_type: data["industry-type"],
-        website: data.website,
-        socials: data.socials,
-        contact_person: data["contact-person"],
-        contact_person_role: data["contact-person-role"],
-        interests: data.interests,
-      };
-    }
+    try {
+      // First, check if user already exists in registrations table
+      const { data: existingUser } = await supabase
+        .from("registrations")
+        .select("email")
+        .eq("email", data.email)
+        .single();
 
-    const { error } = await supabase.auth.signUp({
-      email: data.email as string,
-      password: Math.random().toString(36).slice(-8), // Generate a random password
-      options: {
-        data: submissionData,
-      },
-    });
-
-    setIsLoading(false);
-
-    if (error) {
-      if (error.message.includes("User already registered")) {
-        toast.error("User already registered. Please login.");
-      } else {
-        toast.error("Error registering attendee. Please try again.");
+      if (existingUser) {
+        setIsLoading(false);
+        toast.error(
+          "Email already registered. Please use a different email or login if you have an account."
+        );
+        return;
       }
-    } else {
-      fetch("/api/send-qr", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          record: {
+
+      // Insert registration data first
+      const { error: insertError } = await supabase
+        .from("registrations")
+        .insert([submissionData]);
+
+      if (insertError) {
+        setIsLoading(false);
+        toast.error("Error saving registration data. Please try again.");
+        console.error("Insert error:", insertError);
+        return;
+      }
+
+      // Then create auth user with email verification using native templates
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: data.email as string,
+        password: Math.random().toString(36).slice(-8), // Generate random password
+        options: {
+          data: {
+            full_name: data["full-name"],
             email: data.email,
-            full_name: `${data["first-name"]} ${data.surname}`,
+            organization: data.organization,
+            role: data.role,
+            user_type_selection: data["user-type-selection"],
           },
-        }),
+          emailRedirectTo: `${window.location.origin}/registration-success`,
+          // This will automatically use Supabase's native "Confirm Email" template
+        },
       });
-      toast.success(
-        "Registration successful! Please check your email to confirm."
-      );
-      setStep(1);
-      setFormData({});
-      setSelectedClasses([]);
-      // Reset the form
-      const form = document.querySelector("form");
-      if (form) {
-        form.reset();
+
+      setIsLoading(false);
+
+      if (authError) {
+        console.error("Auth error:", authError);
+        if (authError.message.includes("User already registered")) {
+          toast.error(
+            "Email already registered. Please login or use a different email."
+          );
+        } else {
+          toast.error("Error creating account. Please try again.");
+        }
+        return;
       }
+
+      if (authData.user) {
+        toast.success(
+          "Registration successful! Please check your email and click the verification link to complete your registration."
+        );
+
+        // Reset form
+        setStep(1);
+        setFormData({});
+        setSelectedClasses([]);
+        setParagraphValues({ impact: "", "why-attend": "" });
+
+        const form = document.querySelector("form");
+        if (form) {
+          form.reset();
+          const textareas = form.querySelectorAll("textarea");
+          textareas.forEach((textarea) => (textarea.value = ""));
+        }
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Registration error:", error);
+      toast.error("An unexpected error occurred. Please try again.");
     }
   };
 
@@ -177,12 +225,12 @@ const RegisterPage = () => {
         </div>
 
         <div className="text-center">
-          <a
+          {/* <a
             href="/login"
             className="font-medium text-primary hover:text-primary-dark"
           >
             Already registered? Login
-          </a>
+          </a> */}
         </div>
 
         {registrationType === "attendee" ? (
@@ -190,112 +238,12 @@ const RegisterPage = () => {
             {step === 1 && (
               <form className="mt-8 space-y-6" onSubmit={handleNextStep}>
                 <div className="rounded-md shadow-sm space-y-4">
-                  <div className="flex justify-center">
-                    <div className="flex rounded-md shadow-sm">
-                      <button
-                        onClick={() => setUserType("individual")}
-                        className={`px-4 py-2 border border-gray-300 text-sm font-medium rounded-l-md ${
-                          userType === "individual"
-                            ? "bg-primary text-white"
-                            : "bg-white text-gray-700 hover:bg-gray-50"
-                        }`}
-                      >
-                        Individual
-                      </button>
-                      <button
-                        onClick={() => setUserType("company")}
-                        className={`px-4 py-2 border-t border-b border-gray-300 text-sm font-medium ${
-                          userType === "company"
-                            ? "bg-primary text-white"
-                            : "bg-white text-gray-700 hover:bg-gray-50"
-                        }`}
-                      >
-                        Company
-                      </button>
-                    </div>
-                  </div>
-                  {userType === "individual" ? (
-                    <>
-                      <div className="grid grid-cols-2 gap-4">
-                        <Input
-                          name="first-name"
-                          type="text"
-                          required
-                          placeholder="First Name"
-                        />
-                        <Input
-                          name="surname"
-                          type="text"
-                          required
-                          placeholder="Surname"
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <Input
-                        name="company-name"
-                        type="text"
-                        required
-                        placeholder="Company Name"
-                      />
-                      <Input
-                        name="industry-type"
-                        type="text"
-                        required
-                        placeholder="Industry Type"
-                      />
-                      <Input
-                        name="website"
-                        type="url"
-                        placeholder="Website (if any)"
-                      />
-                      <Input
-                        name="socials"
-                        type="text"
-                        required
-                        placeholder="Instagram / Twitter / LinkedIn (if any)"
-                      />
-                      <Input
-                        name="contact-person"
-                        type="text"
-                        required
-                        placeholder="Contact Person (Full Name)"
-                      />
-                      <Input
-                        name="contact-person-role"
-                        type="text"
-                        required
-                        placeholder="Role in the company"
-                      />
-                      <div className="space-y-2">
-                        <Label>Interested in:</Label>
-                        <div className="flex flex-wrap gap-4">
-                          {[
-                            "Attending",
-                            "Partnership",
-                            "Sponsorship",
-                            "Exhibiting",
-                            "Other",
-                          ].map((interest) => (
-                            <div key={interest} className="flex items-center">
-                              <Checkbox
-                                id={`interest-${interest.toLowerCase()}`}
-                                name="interests"
-                                value={interest}
-                              />
-                              <Label
-                                htmlFor={`interest-${interest.toLowerCase()}`}
-                                className="ml-2"
-                              >
-                                {interest}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
+                  <Input
+                    name="full-name"
+                    type="text"
+                    required
+                    placeholder="Full Name"
+                  />
                   <Input
                     name="email"
                     type="email"
@@ -308,67 +256,97 @@ const RegisterPage = () => {
                     placeholder="Phone Number (WhatsApp preferred)"
                     required
                   />
-                  {userType === "individual" && (
-                    <div className="flex items-center">
-                      {/* <Checkbox
-                        id="wants-masterclass"
-                        onCheckedChange={() =>
-                          setWantsMasterclass(!wantsMasterclass)
-                        }
-                      />
-                      <Label htmlFor="wants-masterclass" className="ml-2">
-                        Masterclass
-                      </Label> */}
-                    </div>
-                  )}
+                  <Input
+                    name="organization"
+                    type="text"
+                    required
+                    placeholder="Organization / Business / Institution"
+                  />
+                  <Input
+                    name="role"
+                    type="text"
+                    required
+                    placeholder="Role / Title"
+                  />
+                  <Input
+                    name="sector-of-focus"
+                    type="text"
+                    required
+                    placeholder="Sector of Focus (Agriculture, Power, Solid Minerals, ICT, Other)"
+                  />
+                  <div className="space-y-2">
+                    <Label>
+                      Are you an SME owner, policymaker, investor, or
+                      technocrat?
+                    </Label>
+                    <RadioGroup name="user-type-selection" required>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="sme-owner" id="sme-owner" />
+                        <Label htmlFor="sme-owner">SME Owner</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="policymaker" id="policymaker" />
+                        <Label htmlFor="policymaker">Policymaker</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="investor" id="investor" />
+                        <Label htmlFor="investor">Investor</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="technocrat" id="technocrat" />
+                        <Label htmlFor="technocrat">Technocrat</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div>
+                    <Textarea
+                      name="impact"
+                      required
+                      placeholder="What impact have you made in your sector? (short paragraph)"
+                      value={paragraphValues.impact}
+                      onChange={handleParagraphChange}
+                    />
+                    <p className="text-xs text-gray-500 text-right">
+                      {
+                        paragraphValues.impact.split(/\s+/).filter(Boolean)
+                          .length
+                      }
+                      /100 words
+                    </p>
+                  </div>
+                  <div>
+                    <Textarea
+                      name="why-attend"
+                      required
+                      placeholder="Why do you want to attend physically? (short paragraph)"
+                      value={paragraphValues["why-attend"]}
+                      onChange={handleParagraphChange}
+                    />
+                    <p className="text-xs text-gray-500 text-right">
+                      {
+                        paragraphValues["why-attend"]
+                          .split(/\s+/)
+                          .filter(Boolean).length
+                      }
+                      /100 words
+                    </p>
+                  </div>
+                </div>
+                <div className="text-xs text-gray-400">
+                  <p>
+                    Due to limited physical seating, priority will be given to
+                    technocrats, SMEs, investors, and policymakers directly
+                    engaged in Northern Nigeria’s investment and
+                    industrialization. All other registrants will receive
+                    live-stream access.
+                  </p>
                 </div>
                 <div>
                   <Button type="submit" className="w-full">
-                    {userType === "individual" && wantsMasterclass
-                      ? "Next"
-                      : "Submit"}
+                    Submit
                   </Button>
                 </div>
               </form>
-            )}
-
-            {step === 2 && (
-              <div className="mt-8 space-y-6">
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900">
-                    Masterclasses
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-600">
-                    Select the masterclasses you would like to attend.
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  {config.masterclasses.map((masterclass) => (
-                    <div key={masterclass.title} className="flex items-center">
-                      <Checkbox
-                        id={masterclass.title}
-                        onCheckedChange={() =>
-                          handleClassChange(masterclass.title)
-                        }
-                      />
-                      <Label htmlFor={masterclass.title} className="ml-2">
-                        {masterclass.title}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex justify-between">
-                  <Button variant="outline" onClick={() => setStep(1)}>
-                    Previous
-                  </Button>
-                  <Button
-                    onClick={() => handleAttendeeSubmit(formData)}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Registering..." : "Submit"}
-                  </Button>
-                </div>
-              </div>
             )}
           </div>
         ) : registrationType === "exhibitor" ? (

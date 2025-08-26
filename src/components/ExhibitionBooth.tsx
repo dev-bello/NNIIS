@@ -14,6 +14,8 @@ import { useState } from "react";
 
 const ExhibitionBooth = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [industry, setIndustry] = useState("");
+  const [sponsorshipPackage, setSponsorshipPackage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,26 +24,94 @@ const ExhibitionBooth = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    const { error } = await supabase.auth.signUp({
+    const exhibitorData = {
+      company_name: data["company-name"] as string,
       email: data.email as string,
-      password: Math.random().toString(36).slice(-8),
-      options: {
-        data: {
-          ...data,
-          type: "exhibitor",
+      industry: industry,
+      website: data.website as string,
+      package: sponsorshipPackage,
+    };
+
+    try {
+      // First, check if exhibitor already exists
+      const { data: existingExhibitor } = await supabase
+        .from("exhibitors")
+        .select("email")
+        .eq("email", exhibitorData.email)
+        .single();
+
+      if (existingExhibitor) {
+        setIsLoading(false);
+        toast.error(
+          "Email already registered as exhibitor. Please use a different email."
+        );
+        return;
+      }
+
+      // Create auth user first
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: exhibitorData.email,
+        password: Math.random().toString(36).slice(-8), // Generate random password
+        options: {
+          data: {
+            company_name: exhibitorData.company_name,
+            email: exhibitorData.email,
+            industry: exhibitorData.industry,
+            user_type: "exhibitor",
+          },
+          emailRedirectTo: `${window.location.origin}/registration-success`,
         },
-      },
-    });
+      });
 
-    setIsLoading(false);
+      if (authError) {
+        setIsLoading(false);
+        console.error("Auth error:", authError);
+        if (authError.message.includes("User already registered")) {
+          toast.error(
+            "Email already registered. Please login or use a different email."
+          );
+        } else {
+          toast.error("Error creating account. Please try again.");
+        }
+        return;
+      }
 
-    if (error) {
-      toast.error("Error registering exhibitor. Please try again.");
-    } else {
+      if (!authData.user) {
+        setIsLoading(false);
+        toast.error("Error creating user account. Please try again.");
+        return;
+      }
+
+      // Insert exhibitor data using the auth user's ID
+      const { error: insertError } = await supabase.from("exhibitors").insert([
+        {
+          ...exhibitorData,
+          id: authData.user.id, // Use the auth user's ID
+        },
+      ]);
+
+      setIsLoading(false);
+
+      if (insertError) {
+        console.error("Insert error:", insertError);
+        // If exhibitor insert fails, we should clean up the auth user
+        await supabase.auth.admin.deleteUser(authData.user.id);
+        toast.error("Error saving exhibitor data. Please try again.");
+        return;
+      }
+
       toast.success(
-        "Registration successful! Please check your email to confirm."
+        "Registration successful! Please check your email and click the verification link. You will be contacted to complete your registration."
       );
+
+      // Reset form
       form.reset();
+      setIndustry("");
+      setSponsorshipPackage("");
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Exhibition registration error:", error);
+      toast.error("An unexpected error occurred. Please try again.");
     }
   };
 
@@ -86,7 +156,12 @@ const ExhibitionBooth = () => {
           <Label htmlFor="industry">
             Industry <span className="text-red-600">*</span>
           </Label>
-          <Select name="industry" required>
+          <Select
+            name="industry"
+            required
+            onValueChange={setIndustry}
+            value={industry}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select industry" />
             </SelectTrigger>
@@ -100,6 +175,7 @@ const ExhibitionBooth = () => {
             </SelectContent>
           </Select>
         </div>
+
         <div className="space-y-2">
           <Label htmlFor="website">Website</Label>
           <Input
@@ -108,6 +184,27 @@ const ExhibitionBooth = () => {
             placeholder="e.g. https://example.com"
             type="url"
           />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="package">
+            Package <span className="text-red-600">*</span>
+          </Label>
+          <Select
+            name="package"
+            required
+            onValueChange={setSponsorshipPackage}
+            value={sponsorshipPackage}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select Sponsorship package" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Platinum-sponsor">Platinum Sponsor</SelectItem>
+              <SelectItem value="gold-sponsor">Gold Sponsor</SelectItem>
+              <SelectItem value="silver-sponsor">Silver Sponsor</SelectItem>
+              <SelectItem value="bronze-sponsor">Exhibitor</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
       <div className="mt-8 bg-green-100 p-4 rounded-lg text-center">

@@ -43,17 +43,18 @@ const KeySpeakersSection = () => {
       role: "Plenary Chair",
       image: "/images/bua.png",
     },
-    {
-      name: "Muhammad Sanusi II",
-      title: "Former CBN Governor",
-      role: "Industry Expert",
-      image: "/images/sls.png",
-    },
+
     {
       name: "Professor Babakalli Alkali",
       title: `Head of Mechanical Engineering and Professor of Maintenance and Reliability Engineering, Glasgow Caledonian University`,
       role: "Industry Expert",
       image: "/images/babakalli.jpg",
+    },
+    {
+      name: "ENGR. Abdulrahman Sikiru Ottan (Ph.D)",
+      title: `Mining Engineer and Project Development Expert`,
+      role: "Industry Expert",
+      image: "/images/ottan.jpeg",
     },
   ];
 

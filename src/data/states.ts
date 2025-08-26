@@ -11,6 +11,7 @@ export interface StateData {
   initiatives: string[];
   advantages: string[];
   description: string;
+  minerals: string[];
 }
 
 export const STATES_DATA: Record<string, StateData> = {
@@ -55,6 +56,16 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       "Adamawa State, in northeastern Nigeria, is an agricultural hub largely producing maize, rice, groundnuts, and livestock. Bordering Cameroon, it boasts rich cultural heritage, untapped oil and mineral resources, and key tourist sites like the Mambilla Plateau and Gashaka-Gumti National Park. With vast natural wealth and a strategic location, it offers strong investment potential.",
+    minerals: [
+      "Barite",
+      "Cassiterite", 
+      "Clay",
+      "Feldspar",
+      "Graphite",
+      "Limestone",
+      "Magnesite",
+      "Trona"
+    ],
   },
   bauchi: {
     name: "Bauchi State",
@@ -93,7 +104,27 @@ export const STATES_DATA: Record<string, StateData> = {
       "Ranked 4th in the 2021 subnational Ease of Doing Business rankings",
     ],
     description:
-      "Bauchi State, situated in northeastern Nigeria, is endowed with abundant mineral and fertile land resources. The state produces a variety of crops including maize, rice, millet, groundnuts, and cotton, and also supports livestock farming. It is home to Yankari National Park, one of Nigeria’s premier wildlife and eco-tourism destinations. The state government focuses on advancing agriculture, education, tourism, and infrastructure as key drivers of development.",
+      "Bauchi State, situated in northeastern Nigeria, is endowed with abundant mineral and fertile land resources. The state produces a variety of crops including maize, rice, millet, groundnuts, and cotton, and also supports livestock farming. It is home to Yankari National Park, one of Nigeria's premier wildlife and eco-tourism destinations. The state government focuses on advancing agriculture, education, tourism, and infrastructure as key drivers of development.",
+    minerals: [
+      "Amethyst",
+      "Aquamarine",
+      "Beryl",
+      "Bismuth",
+      "Cassiterite",
+      "Clay",
+      "Columbite",
+      "Copper",
+      "Corundum",
+      "Feldspar",
+      "Fluorite",
+      "Garnet",
+      "Kaolin",
+      "Lead",
+      "Zinc-ore",
+      "Rutile",
+      "Wolframite",
+      "Zircon"
+    ],
   },
   benue: {
     name: "Benue State",
@@ -140,6 +171,16 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       "Benue State, known as Nigeria’s “Food Basket,” is a major agricultural hub producing yam, rice, cassava, and soybeans. It also has significant livestock farming, fisheries, and natural resources like limestone and gypsum. With a rich cultural heritage and government focus on agriculture, infrastructure, and education, the state offers strong investment opportunities.",
+    minerals: [
+      "Barite",
+      "Bentonite",
+      "Brine",
+      "Clay",
+      "Coal",
+      "Galena",
+      "Gypsum",
+      "Kaolin"
+    ],
   },
   borno: {
     name: "Borno State",
@@ -182,6 +223,18 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       "Borno State is the second largest state by land area and rich in agriculture, livestock, and trade, particularly around Lake Chad. Despite recent security challenges, the state is focused on reconstruction, infrastructure development, and economic recovery, offering opportunities in sectors like tourism and agribusiness.",
+    minerals: [
+      "Bentonite",
+      "Clay",
+      "Feldspar",
+      "Garnet",
+      "Gypsum",
+      "Kaolin",
+      "Limestone",
+      "Sapphire",
+      "Trona",
+      "Zircon"
+    ],
   },
   fct: {
     name: "Federal Capital Territory",
@@ -203,6 +256,23 @@ export const STATES_DATA: Record<string, StateData> = {
     initiatives: ["", "", ""],
     advantages: ["", "", "", ""],
     description: "Nigeria's Capital City",
+    minerals: [
+      "Cassiterite",
+      "Clay",
+      "Dimension Stone",
+      "Feldspar",
+      "Galena",
+      "Gold",
+      "Kaolin",
+      "Kyanite",
+      "Lead",
+      "Zinc Ore",
+      "Marble",
+      "Muscovite",
+      "Quartz",
+      "Tantalite",
+      "Zircon"
+    ],
   },
   gombe: {
     name: "Gombe State",
@@ -251,6 +321,23 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       "Gombe State, situated in northeastern Nigeria, offers a wealth of investment opportunities with its strong agricultural base, producing key crops like maize, millet, and groundnuts, alongside valuable coal and limestone deposits. The state is committed to industrial growth, infrastructure development, and economic diversification, making it a prime location for investors.",
+    minerals: [
+      "Barite",
+      "Bentonite",
+      "Calcite",
+      "Chalcopyrite",
+      "Clay",
+      "Coal",
+      "Diatomite",
+      "Feldspar",
+      "Fluorite",
+      "Gypsum",
+      "Kaolin",
+      "Lignite",
+      "Limestone",
+      "Quartz",
+      "Trona"
+    ],
   },
   jigawa: {
     name: "Jigawa State",
@@ -289,6 +376,18 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       "Jigawa State, in northwestern Nigeria, offers rich opportunities in agriculture, livestock, and leather production. With growing investment in infrastructure and rural development, and unique tourism sites like the Birnin Kudu Rock Paintings, it's a rising destination for smart investors.",
+    minerals: [
+      "Brine",
+      "Cassiterite",
+      "Clay",
+      "Columbite",
+      "Dimension Stone",
+      "Feldspar",
+      "Gemstone",
+      "Glass Sand",
+      "Graphite",
+      "Iron"
+    ],
   },
   kaduna: {
     name: "Kaduna State",
@@ -333,6 +432,34 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       "Kaduna State, in northwestern Nigeria, is an investment hub driven by agriculture, manufacturing, and trade — with key crops like maize, ginger, and cotton. Known for sites like Kajuru Castle and Nok Terracotta, it also hosts major defence industries. The state's focus on infrastructure and industrialization makes it a strategic choice for investors",
+    minerals: [
+      "Ore",
+      "Kaolin",
+      "Limestone",
+      "Marl",
+      "Silica sand",
+      "Trona",
+      "Uranium",
+      "Amethyst",
+      "Aquamarine",
+      "Cassiterite",
+      "Clay",
+      "Columbite",
+      "Diamond",
+      "Dimension stone",
+      "Feldspar",
+      "Gold",
+      "Graphite",
+      "Iron Ore",
+      "Kyanite",
+      "Rutile",
+      "Sapphire",
+      "Sillimanite",
+      "Talc",
+      "Tantalite",
+      "Tourmaline",
+      "Wolframite"
+    ],
   },
   kebbi: {
     name: "Kebbi State",
@@ -375,7 +502,23 @@ export const STATES_DATA: Record<string, StateData> = {
       "Inland dry port (under construction)",
     ],
     description:
-      'Kebbi State, in northwestern Nigeria, is a leading agricultural hub known as "Nigeria’s Rice Capital," with strong production of rice, wheat, millet, and sorghum. It also has a vibrant livestock, fishing, and trade economy. The state is investing in agro-industrial development and infrastructure, with cultural tourism highlighted by the UNESCO-listed Argungu Fishing Festival.',
+      'Kebbi State, in northwestern Nigeria, is a leading agricultural hub known as "Nigeria\'s Rice Capital," with strong production of rice, wheat, millet, and sorghum. It also has a vibrant livestock, fishing, and trade economy. The state is investing in agro-industrial development and infrastructure, with cultural tourism highlighted by the UNESCO-listed Argungu Fishing Festival.',
+    minerals: [
+      "Amethyst",
+      "Aquamarine",
+      "Beryl",
+      "Brine",
+      "Clay",
+      "Gold",
+      "Iron Ore",
+      "Kaolin",
+      "Limestone",
+      "Manganese",
+      "Mica",
+      "Quartz",
+      "Talc",
+      "Topaz"
+    ],
   },
   kano: {
     name: "Kano State",
@@ -417,6 +560,26 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       "Kano State, a commercial hub in northern Nigeria, thrives on agriculture, manufacturing, and trade — producing groundnuts, millet, and rice. With vibrant industries in textiles, leather, and food processing, plus landmarks like the Ancient City Walls and Kurmi Market, Kano blends heritage with opportunity. Ongoing investments in infrastructure, education, and industrialization make it a prime destination for growth-focused investors.",
+    minerals: [
+      "Amethyst",
+      "Beryl",
+      "Calcite",
+      "Cassiterite",
+      "Clay",
+      "Columbite",
+      "Feldspar",
+      "Glass Sand",
+      "Gold",
+      "Kaolin",
+      "Lead",
+      "Zinc Ore",
+      "Marl",
+      "Mica",
+      "Pyrite",
+      "Pyrochlore",
+      "Quartz",
+      "Silica Sand"
+    ],
   },
   kogi: {
     name: "Kogi State",
@@ -459,7 +622,26 @@ export const STATES_DATA: Record<string, StateData> = {
       "Development of LNG facilities strengthens the state’s energy security.",
     ],
     description:
-      "Kogi State, in north-central Nigeria, is rich in coal, limestone, and iron ore, making it a key mining and industrial hub—home to the Ajaokuta Steel Company and Dangote Cement’s largest factory. Agriculture remains vital, with major crops like yam, cassava, and rice. The government is prioritizing infrastructure and industrial growth to attract investment",
+      "Kogi State, in north-central Nigeria, is rich in coal, limestone, and iron ore, making it a key mining and industrial hub—home to the Ajaokuta Steel Company and Dangote Cement's largest factory. Agriculture remains vital, with major crops like yam, cassava, and rice. The government is prioritizing infrastructure and industrial growth to attract investment",
+    minerals: [
+      "Beryl",
+      "Cassiterite",
+      "Clay",
+      "Coal",
+      "Columbite",
+      "Feldspar",
+      "Garnet",
+      "Gold",
+      "Iron Ore",
+      "Kaolin",
+      "Magnetite",
+      "Marble",
+      "Muscovite",
+      "Quartz",
+      "Talc",
+      "Tantalite",
+      "Tourmaline"
+    ],
   },
   katsina: {
     name: "Katsina State",
@@ -503,6 +685,15 @@ export const STATES_DATA: Record<string, StateData> = {
     ],
     description:
       'Katsina State, in northwestern Nigeria, thrives on agriculture—producing cotton, millet, and groundnuts—and is growing as a hub for small industries and livestock farming. Known as the "Home of Hospitality," it features historic sites like the Gobarau Minaret. With investments in education, infrastructure, and diversification, Katsina offers rising opportunities for investors.',
+    minerals: [
+      "Cassiterite",
+      "Clay",
+      "Diamond",
+      "Feldspar",
+      "Iron Ore",
+      "Kaolin",
+      "Quartz"
+    ],
   },
   kwara: {
     name: "Kwara State",
@@ -551,6 +742,16 @@ the highest in West Africa`,
     ],
     description:
       'Kwara State, situated in north-central Nigeria, is known as the "State of Harmony" for its peaceful coexistence among diverse ethnic groups. It is an emerging industrial and commercial hub, attracting investments in manufacturing and agribusiness. The government prioritizes infrastructure development, agro-industrialization, capacity building, and economic growth.',
+    minerals: [
+      "Beryl",
+      "Clay",
+      "Gold",
+      "Marble",
+      "Talc",
+      "Tantalite",
+      "Tin Ore",
+      "Wolframite"
+    ],
   },
   nasarawa: {
     name: "Nasarawa State",
@@ -603,9 +804,20 @@ SOMMEDI, and AMMEDI.`,
       `Abundant natural resource deposits, including
 minerals and oil.`,
     ],
-    description: `Nasarawa State, in north-central Nigeria, is rich in minerals and a key player
-in mining and agriculture. With growing trade, infrastructure, and industrial
-development, it offers strong investment potential.`,
+    description:
+      "Nasarawa State, in north-central Nigeria, is rich in minerals and a key player in Nigeria's solid minerals sector. The state produces crops like rice, yam, and cassava, and has significant deposits of coal, limestone, and other minerals. With ongoing infrastructure development and government focus on mining and agriculture, it offers strong investment potential in both sectors.",
+    minerals: [
+      "Aquamarine",
+      "Barite",
+      "Beryl",
+      "Brine",
+      "Coal",
+      "Columbite",
+      "Emerald",
+      "Galena",
+      "Silver",
+      "Tantalite"
+    ],
   },
   niger: {
     name: "Niger State",
@@ -665,6 +877,18 @@ tin, and barite, offering strong opportunities in mining. Its economy is
 driven by agriculture, trade, and growing industrialisation. Strategic
 government investments in infrastructure and human capital make it a
 rising destination for investors.`,
+    minerals: [
+      "Cassiterite",
+      "Clay",
+      "Gemstones",
+      "Gold",
+      "Kyanite",
+      "Marble",
+      "Talc",
+      "Galena",
+      "Silver",
+      "Tantalite"
+    ],
   },
   plateau: {
     name: "Plateau State",
@@ -726,6 +950,23 @@ cultural heritage. The state is a major hub for agriculture and mining,
 producing crops like potatoes, maize, and vegetables, as well as minerals
 like tin and columbite. The government is focused on infrastructure
 development and economic revitalisation to promote growth.`,
+    minerals: [
+      "Cassiterite",
+      "Clay",
+      "Columbite",
+      "Garnet",
+      "Ilmenite",
+      "Kaolin",
+      "Lead",
+      "Zinc Ore",
+      "Mica",
+      "Quartz",
+      "Sphalerite",
+      "Tin Ore",
+      "Topaz",
+      "Tourmaline",
+      "Zircon"
+    ],
   },
   sokoto: {
     name: "Sokoto State",
@@ -784,6 +1025,13 @@ crops like millet, rice, and onions, and is rich in limestone and phosphate.
 With ongoing government investment in education, infrastructure, and
 economic diversification, Sokoto offers promising opportunities for
 investors.`,
+    minerals: [
+      "Diamond",
+      "Gypsum",
+      "Kaolin",
+      "Limestone",
+      "Phosphate"
+    ],
   },
   taraba: {
     name: "Taraba State",
@@ -841,6 +1089,26 @@ and rice, alongside cattle rearing and the Mambilla Hydroelectric Power
 Project, the state supports diverse economic activity. Ongoing
 government efforts in infrastructure, tourism, and agricultural
 development further enhance its growth prospects.`,
+    minerals: [
+      "Agate",
+      "Barite",
+      "Bauxite",
+      "Beryl",
+      "Brine",
+      "Calcite",
+      "Clay",
+      "Columbite",
+      "Fire Clay",
+      "Graphite",
+      "Gypsum",
+      "Ilmenite",
+      "Iron Ore",
+      "Lead",
+      "Zinc Ore",
+      "Limestone",
+      "Rhodolite",
+      "Tantalite"
+    ],
   },
   yobe: {
     name: "Yobe State",
@@ -895,6 +1163,16 @@ and drought-resistant crops like millet, sorghum, and groundnuts, while
 abundant minerals such as gypsum and limestone fuel economic growth.
 Government focus on security, infrastructure, and agricultural development
 enhances the state's investment potential.`,
+    minerals: [
+      "Clay",
+      "Diatomite",
+      "Feldspar",
+      "Gypsum",
+      "Kaolin",
+      "Limestone",
+      "Marble",
+      "Trona"
+    ],
   },
   zamfara: {
     name: "Zamfara State",
@@ -930,5 +1208,20 @@ minerals, making it a key hub for mining. Agriculture also plays a vital role,
 with crops like millet, sorghum, and maize, alongside livestock farming.
 The government focuses on peacebuilding, mineral exploration,
 agriculture, and infrastructure development to drive economic growth.`,
+    minerals: [
+      "Baryte",
+      "Chromite",
+      "Clay",
+      "Columbite",
+      "Feldspar",
+      "Garnet",
+      "Gold",
+      "Iron Ore",
+      "Lead",
+      "Zinc Ore",
+      "Marble",
+      "Tantalite",
+      "Wolframite"
+    ],
   },
 };

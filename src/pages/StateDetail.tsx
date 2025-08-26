@@ -136,6 +136,29 @@ const StateDetailPage = () => {
           </div>
         </div>
 
+        {/* Minerals Section */}
+        <div className="mt-10 bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+          <h3 className="text-sm font-semibold text-emerald-700 tracking-wider">
+            SOLID MINERALS
+          </h3>
+          <div className="mt-4">
+            <p className="text-gray-600 mb-4">
+              This state is endowed with the following solid minerals:
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {data.minerals.map((mineral, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm"
+                >
+                  <span className="h-2 w-2 rounded-full bg-emerald-600"></span>
+                  <span className="text-emerald-800 font-medium">{mineral}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Bottom two-column lists */}
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
           <section className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">

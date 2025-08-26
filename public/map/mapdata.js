@@ -397,7 +397,7 @@ var simplemaps_countrymap_mapdata = {
     NGAD: {
       name: "Adamawa",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Large-scale agriculture (rice, maize, cotton).<br/>- Livestock farming and processing.<br/>- Solid minerals exploration (bentonite, gypsum).<br/><div style='margin-top:8px'><a href='/state/adamawa' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Adamawa State, in northeastern Nigeria, is an agricultural hub largely producing maize, rice, groundnuts, and livestock. Bordering Cameroon, it boasts rich cultural heritage, untapped oil and mineral resources, and key tourist sites like the Mambilla Plateau and Gashaka-Gumti National Park. With vast natural wealth and a strategic location, it offers strong investment potential.",
       url: "/state/adamawa",
     },
     NGAK: {
@@ -411,19 +411,19 @@ var simplemaps_countrymap_mapdata = {
     NGBA: {
       name: "Bauchi",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Tourism and hospitality (Yankari Game Reserve).<br/>- Solid minerals (kaolin, gypsum, limestone).<br/>- Agro-processing (groundnuts, millet).<br/><div style='margin-top:8px'><a href='/state/bauchi' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Bauchi State, situated in northeastern Nigeria, is endowed with abundant mineral and fertile land resources. The state produces a variety of crops including maize, rice, millet, groundnuts, and cotton, and also supports livestock farming. It is home to Yankari National Park, one of Nigeria’s premier wildlife and eco-tourism destinations. The state government focuses on advancing agriculture, education, tourism, and infrastructure as key drivers of development.",
       url: "/state/bauchi",
     },
     NGBE: {
       name: "Benue",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Fruit juice processing (mangoes, oranges).<br/>- Cassava and yam processing.<br/>- Coal and limestone mining.<br/><div style='margin-top:8px'><a href='/state/benue' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Benue State, known as Nigeria’s “Food Basket,” is a major agricultural hub producing yam, rice, cassava, and soybeans. It also has significant livestock farming, fisheries, and natural resources like limestone and gypsum. With a rich cultural heritage and government focus on agriculture, infrastructure, and education, the state offers strong investment opportunities.",
       url: "/state/benue",
     },
     NGBO: {
       name: "Borno",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Gum arabic production and processing.<br/>- Livestock and fisheries.<br/>- Renewable energy (solar).<br/><div style='margin-top:8px'><a href='/state/borno' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Borno State is the second largest state by land area and rich in agriculture, livestock, and trade, particularly around Lake Chad. Despite recent security challenges, the state is focused on reconstruction, infrastructure development, and economic recovery, offering opportunities in sectors like tourism and agribusiness.",
       url: "/state/borno",
     },
     NGBY: {
@@ -456,14 +456,13 @@ var simplemaps_countrymap_mapdata = {
     },
     NGFC: {
       name: "Federal Capital Territory",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Real estate and infrastructure development.<br/>- ICT and business process outsourcing.<br/>- Tourism and hospitality.<br/><div style='margin-top:8px'><a href='/state/fct' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: "",
       url: "/state/fct",
     },
     NGGO: {
       name: "Gombe",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Cement production (limestone).<br/>- Cotton ginning and textile manufacturing.<br/>- Tomato and pepper processing.<br/><div style='margin-top:8px'><a href='/state/gombe' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Gombe State, situated in northeastern Nigeria, offers a wealth of investment opportunities with its strong agricultural base, producing key crops like maize, millet, and groundnuts, alongside valuable coal and limestone deposits. The state is committed to industrial growth, infrastructure development, and economic diversification, making it a prime location for investors.",
       url: "/state/gombe",
     },
     NGIM: {
@@ -473,43 +472,43 @@ var simplemaps_countrymap_mapdata = {
     NGJI: {
       name: "Jigawa",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Sesame seed and hibiscus processing.<br/>- ICT and knowledge-based industries.<br/>- Date farming and processing.<br/><div style='margin-top:8px'><a href='/state/jigawa' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Jigawa State, in northwestern Nigeria, offers rich opportunities in agriculture, livestock, and leather production. With growing investment in infrastructure and rural development, and unique tourism sites like the Birnin Kudu Rock Paintings, it's a rising destination for smart investors.",
       url: "/state/jigawa",
     },
     NGKD: {
       name: "Kaduna",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Textile and garment manufacturing.<br/>- Ginger processing and export.<br/>- ICT and innovation hubs.<br/><div style='margin-top:8px'><a href='/state/kaduna' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Kaduna State, in northwestern Nigeria, is an investment hub driven by agriculture, manufacturing, and trade — with key crops like maize, ginger, and cotton. Known for sites like Kajuru Castle and Nok Terracotta, it also hosts major defence industries. The state's focus on infrastructure and industrialization makes it a strategic choice for investors",
       url: "/state/kaduna",
     },
     NGKE: {
       name: "Kebbi",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Rice milling and processing.<br/>- Onion and garlic farming and export.<br/>- Gold mining and processing.<br/><div style='margin-top:8px'><a href='/state/kebbi' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        'Kebbi State, in northwestern Nigeria, is a leading agricultural hub known as "Nigeria’s Rice Capital," with strong production of rice, wheat, millet, and sorghum. It also has a vibrant livestock, fishing, and trade economy. The state is investing in agro-industrial development and infrastructure, with cultural tourism highlighted by the UNESCO-listed Argungu Fishing Festival.',
       url: "/state/kebbi",
     },
     NGKN: {
       name: "Kano",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Leather tanning and footwear manufacturing.<br/>- Agro-commodities trading and export.<br/>- Film and entertainment industry (Kannywood).<br/><div style='margin-top:8px'><a href='/state/kano' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Kano State, a commercial hub in northern Nigeria, thrives on agriculture, manufacturing, and trade — producing groundnuts, millet, and rice. With vibrant industries in textiles, leather, and food processing, plus landmarks like the Ancient City Walls and Kurmi Market, Kano blends heritage with opportunity. Ongoing investments in infrastructure, education, and industrialization make it a prime destination for growth-focused investors.",
       url: "/state/kano",
     },
     NGKO: {
       name: "Kogi",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Iron and steel production.<br/>- Cashew processing and export.<br/>- Inland port and logistics services.<br/><div style='margin-top:8px'><a href='/state/kogi' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        "Kogi State, in north-central Nigeria, is rich in coal, limestone, and iron ore, making it a key mining and industrial hub—home to the Ajaokuta Steel Company and Dangote Cement’s largest factory. Agriculture remains vital, with major crops like yam, cassava, and rice. The government is prioritizing infrastructure and industrial growth to attract investment",
       url: "/state/kogi",
     },
     NGKT: {
       name: "Katsina",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Cotton farming and ginning.<br/>- Sugarcane cultivation and processing.<br/>- Wind and solar energy projects.<br/><div style='margin-top:8px'><a href='/state/katsina' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        'Katsina State, in northwestern Nigeria, thrives on agriculture—producing cotton, millet, and groundnuts—and is growing as a hub for small industries and livestock farming. Known as the "Home of Hospitality," it features historic sites like the Gobarau Minaret. With investments in education, infrastructure, and diversification, Katsina offers rising opportunities for investors.',
       url: "/state/katsina",
     },
     NGKW: {
       name: "Kwara",
       description:
-        "<strong>Investment Opportunities:</strong><br/>- Sugarcane and cassava processing.<br/>- Solid minerals (marble, granite).<br/>- Education and healthcare services.<br/><div style='margin-top:8px'><a href='/state/kwara' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+        'Kwara State, situated in north-central Nigeria, is known as the "State of Harmony" for its peaceful coexistence among diverse ethnic groups. It is an emerging industrial and commercial hub, attracting investments in manufacturing and agribusiness. The government prioritizes infrastructure development, agro-industrialization, capacity building, and economic growth.',
       url: "/state/kwara",
     },
     NGLA: {
@@ -518,14 +517,18 @@ var simplemaps_countrymap_mapdata = {
     },
     NGNA: {
       name: "Nassarawa",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Solid minerals (barite, salt).<br/>- Sesame and melon seed processing.<br/>- Proximity to Abuja for real estate.<br/><div style='margin-top:8px'><a href='/state/nasarawa' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: `Nasarawa State, in north-central Nigeria, is rich in minerals and a key player
+in mining and agriculture. With growing trade, infrastructure, and industrial
+development, it offers strong investment potential.`,
       url: "/state/nasarawa",
     },
     NGNI: {
       name: "Niger",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Shea butter processing and export.<br/>- Hydroelectric power generation.<br/>- Gold and talc mining.<br/><div style='margin-top:8px'><a href='/state/niger' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: `Niger State, in north-central Nigeria, is rich in solid minerals like limestone,
+tin, and barite, offering strong opportunities in mining. Its economy is
+driven by agriculture, trade, and growing industrialisation. Strategic
+government investments in infrastructure and human capital make it a
+rising destination for investors.`,
       url: "/state/niger",
     },
     NGOG: {
@@ -546,8 +549,11 @@ var simplemaps_countrymap_mapdata = {
     },
     NGPL: {
       name: "Plateau",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Tin and columbite mining.<br/>- Potato and vegetable farming.<br/>- Tourism and hospitality.<br/><div style='margin-top:8px'><a href='/state/plateau' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: `Plateau State is known for its cool climate, scenic landscapes, and rich
+cultural heritage. The state is a major hub for agriculture and mining,
+producing crops like potatoes, maize, and vegetables, as well as minerals
+like tin and columbite. The government is focused on infrastructure
+development and economic revitalisation to promote growth.`,
       url: "/state/plateau",
     },
     NGRI: {
@@ -556,26 +562,42 @@ var simplemaps_countrymap_mapdata = {
     },
     NGSO: {
       name: "Sokoto",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Leather tanning and export.<br/>- Onion and garlic farming.<br/>- Phosphate and limestone mining.<br/><div style='margin-top:8px'><a href='/state/sokoto' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: `Sokoto State, located in northwestern Nigeria, is a culturally significant
+region with a strong agricultural base and rich mineral resources. Known for
+its Islamic heritage and home to the Sultan of Sokoto, the state produces
+crops like millet, rice, and onions, and is rich in limestone and phosphate.
+With ongoing government investment in education, infrastructure, and
+economic diversification, Sokoto offers promising opportunities for
+investors.`,
       url: "/state/sokoto",
     },
     NGTA: {
       name: "Taraba",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Tea and coffee plantations.<br/>- Highland agriculture (fruits, vegetables).<br/>- Gemstone mining (sapphire, tourmaline).<br/><div style='margin-top:8px'><a href='/state/taraba' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: `Taraba State offers strong investment potential through its rich
+agriculture, tourism, and natural resources. With crops like tea, coffee,
+and rice, alongside cattle rearing and the Mambilla Hydroelectric Power
+Project, the state supports diverse economic activity. Ongoing
+government efforts in infrastructure, tourism, and agricultural
+development further enhance its growth prospects.`,
       url: "/state/taraba",
     },
     NGYO: {
       name: "Yobe",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Potash and gypsum mining.<br/>- Sesame and groundnut processing.<br/>- Livestock and dairy farming.<br/><div style='margin-top:8px'><a href='/state/yobe' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: `Yobe State offers investment opportunities in agriculture, mineral
+resources, and commerce. Its hot, dry climate supports livestock farming
+and drought-resistant crops like millet, sorghum, and groundnuts, while
+abundant minerals such as gypsum and limestone fuel economic growth.
+Government focus on security, infrastructure, and agricultural development
+enhances the state's investment potential.`,
       url: "/state/yobe",
     },
     NGZA: {
       name: "Zamfara",
-      description:
-        "<strong>Investment Opportunities:</strong><br/>- Gold mining and processing.<br/>- Cotton and tobacco farming.<br/>- Livestock and meat processing.<br/><div style='margin-top:8px'><a href='/state/zamfara' style='display:inline-block;padding:8px 12px;background:#22A44C;color:#fff;border-radius:6px;text-decoration:none'>Learn More</a></div>",
+      description: `Zamfara State, in northwestern Nigeria, is rich in gold and other solid
+minerals, making it a key hub for mining. Agriculture also plays a vital role,
+with crops like millet, sorghum, and maize, alongside livestock farming.
+The government focuses on peacebuilding, mineral exploration,
+agriculture, and infrastructure development to drive economic growth.`,
       url: "/state/zamfara",
     },
   },

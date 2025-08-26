@@ -91,12 +91,9 @@ const Header = () => {
                 Logout
               </Button>
             ) : (
-              <Button
-                variant="outline"
-                size="default"
-                onClick={() => (window.location.href = "/login")}
-              >
-                Already Registered?
+              // Login disabled until users are selected
+              <Button variant="outline" size="default" disabled>
+                {/* Login disabled */}
               </Button>
             )}
           </div>
@@ -177,13 +174,14 @@ const Header = () => {
                   Logout
                 </Button>
               ) : (
+                // Login disabled until users are selected
                 <Button
                   variant="outline"
                   size="default"
                   className="w-full"
-                  onClick={() => (window.location.href = "/login")}
+                  disabled
                 >
-                  Already Registered?
+                  {/* Login disabled */}
                 </Button>
               )}
             </div>

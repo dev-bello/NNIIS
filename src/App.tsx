@@ -16,6 +16,7 @@ import DashboardPage from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import B2BPage from "./pages/B2B";
 import StateDetailPage from "./pages/StateDetail";
+import SelectionStatusPage from "./pages/SelectionStatus";
 
 const queryClient = new QueryClient();
 
@@ -36,8 +37,9 @@ const App = () => (
             path="/registration-success"
             element={<RegistrationSuccessPage />}
           />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/verify-otp" element={<VerifyOtpPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          {/* <Route path="/verify-otp" element={<VerifyOtpPage />} /> */}
+          <Route path="/selection-status" element={<SelectionStatusPage />} />
           <Route path="/state/:slug" element={<StateDetailPage />} />
           <Route
             path="/dashboard"

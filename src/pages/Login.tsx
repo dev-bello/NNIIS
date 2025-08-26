@@ -12,23 +12,29 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    const { error } = await supabase.auth.signInWithOtp({
-      email: data.email as string,
-    });
-
-    setIsLoading(false);
-
-    if (error) {
-      toast.error("Error sending login code. Please try again.");
-    } else {
-      toast.success("Login code sent! Please check your email.");
-      navigate(`/verify-otp?email=${data.email}`);
-    }
+    // Login temporarily disabled until users have been selected
+    toast.info("Login is currently disabled. Please check back later.");
+    return;
+    // const form = e.currentTarget;
+    // const formData = new FormData(form);
+    // const data = Object.fromEntries(formData.entries());
+    // const { error } = await supabase.auth.signInWithOtp({
+    //   email: data.email as string,
+    //   options: {
+    //     shouldCreateUser: false,
+    //     emailRedirectTo: `${window.location.origin}/dashboard`,
+    //     data: {
+    //       login_type: "secure_code",
+    //       phone: data.phone as string,
+    //     },
+    //   },
+    // });
+    // if (error) {
+    //   toast.error("Error sending login code. Please try again.");
+    // } else {
+    //   toast.success("Login code sent! Please check your email.");
+    //   navigate(`/verify-otp?email=${data.email}`);
+    // }
   };
 
   return (
@@ -64,9 +70,12 @@ const LoginPage = () => {
           </div>
 
           <div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Sending..." : "Send Login Code"}
+            <Button type="submit" className="w-full" disabled={true}>
+              Login disabled
             </Button>
+            <p className="mt-2 text-center text-sm text-gray-500">
+              Login will be enabled after users have been selected.
+            </p>
           </div>
         </form>
       </div>
