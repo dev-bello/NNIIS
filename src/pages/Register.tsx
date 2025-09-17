@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSearchParams } from "react-router-dom";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import ExhibitionBooth from "@/components/ExhibitionBooth";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { usePaystackPayment } from "react-paystack";
 import { Checkbox } from "@/components/ui/checkbox";
+import RegisterHeroSection from "@/components/RegisterHeroSection";
 
 type FormData = {
   "full-name"?: string;
@@ -17,6 +18,9 @@ type FormData = {
   organization?: string;
   role?: string;
   "sector-of-focus"?: string;
+  "sme-owner-policymaker-investor-technocrat"?: string;
+  impact?: string;
+  "why-attend"?: string;
   [key: string]: any;
 };
 
@@ -29,8 +33,9 @@ const RegisterPage = () => {
   const [groupSize, setGroupSize] = useState(5);
   const [isPaymentTriggered, setIsPaymentTriggered] = useState(false);
   const [isYouth, setIsYouth] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const USD_TO_NGN_RATE = 1522.7;
+  const USD_TO_NGN_RATE = 1489.57;
 
   const formatAsNaira = (amount: number) => {
     return new Intl.NumberFormat("en-NG", {
@@ -55,7 +60,7 @@ const RegisterPage = () => {
     if (participantType === "individual") {
       amount = isYouth ? 100 : now < earlyBirdDeadline ? 150 : 200;
     } else if (participantType === "group") {
-      amount = groupSize === 5 ? 700 : 1500;
+      amount = groupSize === 5 ? 700 : 1300;
     } else if (participantType === "youth") {
       amount = 100;
     }
@@ -82,53 +87,27 @@ const RegisterPage = () => {
       organization: data.organization,
       role: data.role,
       sector_of_focus: data["sector-of-focus"],
-      participant_type: data.participantType,
+      user_type_selection: data["sme-owner-policymaker-investor-technocrat"],
+      impact: data.impact,
+      why_attend: data["why-attend"],
     };
 
     try {
-      const { data: existingUser } = await supabase
-        .from("registrations")
-        .select("email")
-        .eq("email", data.email)
-        .single();
-
-      if (existingUser) {
-        toast.error("Email already registered. Please use a different email.");
-        return;
-      }
-
-      const { error: insertError } = await supabase
-        .from("registrations")
-        .insert([submissionData]);
-
-      if (insertError) {
-        toast.error("Error saving registration data. Please try again.");
-        console.error("Insert error:", insertError);
-        return;
-      }
-
-      const { error: authError } = await supabase.auth.signUp({
-        email: data.email as string,
+      const { error } = await supabase.auth.signUp({
+        email: submissionData.email,
         password: Math.random().toString(36).slice(-8),
         options: {
-          data: {
-            full_name: data["full-name"],
-            email: data.email,
-            organization: data.organization,
-            role: data.role,
-            participant_type: data.participantType,
-          },
-          emailRedirectTo: `${window.location.origin}/registration-success`,
+          data: submissionData,
         },
       });
 
-      if (authError) {
-        toast.error(authError.message);
+      if (error) {
+        toast.error(error.message);
         return;
       }
 
       toast.success(
-        "Registration successful! Please check your email to verify."
+        "Registration successful! Please check your email to confirm."
       );
       setFormData({});
       const form = document.querySelector("form");
@@ -158,12 +137,6 @@ const RegisterPage = () => {
 
   const handleNextStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!import.meta.env.VITE_PAYSTACK_PUBLIC_KEY) {
-      toast.error(
-        "Paystack public key is not configured. Please check your environment variables."
-      );
-      return;
-    }
     setIsLoading(true);
     const form = e.currentTarget;
     const formEntries = new FormData(form);
@@ -174,112 +147,150 @@ const RegisterPage = () => {
       participantType: isYouth ? "youth" : participantType,
       groupSize: participantType === "group" ? groupSize : undefined,
     };
-    setFormData(newData);
-    setIsPaymentTriggered(true);
+
+    if (participantType === "individual") {
+      handleAttendeeSubmit(newData);
+    } else {
+      if (!import.meta.env.VITE_PAYSTACK_PUBLIC_KEY) {
+        toast.error(
+          "Paystack public key is not configured. Please check your environment variables."
+        );
+        setIsLoading(false);
+        return;
+      }
+      setFormData(newData);
+      setIsPaymentTriggered(true);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="absolute top-4 left-4 bg-green-600 py-1l px-3 text-sm rounded text-white border border-black-600">
-        <a href="/">Back </a>
-      </div>
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Register for NNIIS 2025
-          </h2>
-        </div>
-
-        <div className="flex justify-center">
-          <div className="flex rounded-md shadow-sm">
-            <button
-              onClick={() => setRegistrationType("participant")}
-              className={`px-4 py-2 border border-gray-300 text-sm font-medium rounded-l-md ${
+    <div className="min-h-screen bg-gray-50">
+      <RegisterHeroSection />
+      <div className="max-w-4xl w-full space-y-8 mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Individual Registration */}
+          <div
+            className={`rounded-lg shadow-lg cursor-pointer transition-all duration-300 overflow-hidden ${
+              participantType === "individual" &&
+              registrationType === "participant"
+                ? "ring-4 ring-primary/50"
+                : ""
+            }`}
+            onClick={() => {
+              setRegistrationType("participant");
+              setParticipantType("individual");
+              formRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <img
+              src="/images/register/individual.jpg"
+              alt="Individual Registration"
+              className="w-full h-40 object-cover"
+            />
+            <div
+              className={`p-6 ${
+                participantType === "individual" &&
                 registrationType === "participant"
                   ? "bg-primary text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-50"
+                  : "bg-white"
               }`}
             >
-              Participant
-            </button>
-            <button
-              onClick={() => setRegistrationType("exhibitor")}
-              className={`px-4 py-2 border-t border-b border-gray-300 text-sm font-medium ${
+              <h3 className="text-2xl font-bold mb-4">
+                Register as an Individual
+              </h3>
+              <ul className="list-disc list-inside mt-4">
+                <li>Breakout workshops and B2B</li>
+                <li>Summit kit</li>
+                <li>Networking lunch</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Group Registration */}
+          <div
+            className={`rounded-lg shadow-lg cursor-pointer transition-all duration-300 overflow-hidden ${
+              participantType === "group" && registrationType === "participant"
+                ? "ring-4 ring-primary/50"
+                : ""
+            }`}
+            onClick={() => {
+              setRegistrationType("participant");
+              setParticipantType("group");
+              formRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <img
+              src="/images/register/org.jpg"
+              alt="Group Registration"
+              className="w-full h-40 object-cover"
+            />
+            <div
+              className={`p-6 ${
+                participantType === "group" &&
+                registrationType === "participant"
+                  ? "bg-primary text-white"
+                  : "bg-white"
+              }`}
+            >
+              <h3 className="text-2xl font-bold mb-4">
+                Register as a Company, Organization and Groups
+              </h3>
+              <ul className="list-disc list-inside mt-4">
+                <li>All individual benefits</li>
+                <li>Reserved seating</li>
+                <li>Recognition</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Sponsor/Exhibitor Registration */}
+          <div
+            className={`rounded-lg shadow-lg cursor-pointer transition-all duration-300 overflow-hidden ${
+              registrationType === "exhibitor" ? "ring-4 ring-primary/50" : ""
+            }`}
+            onClick={() => {
+              setRegistrationType("exhibitor");
+              formRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <img
+              src="/images/events/exhibition/exhibition.png"
+              alt="Sponsor/Exhibitor Registration"
+              className="w-full h-40 object-cover"
+            />
+            <div
+              className={`p-6 ${
                 registrationType === "exhibitor"
                   ? "bg-primary text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-50"
+                  : "bg-white"
               }`}
             >
-              Sponsor / Exhibitor
-            </button>
+              <h3 className="text-2xl font-bold mb-4">
+                Sponsorship or Exhibition
+              </h3>
+              <p>Packages available for sponsorship and exhibition booths.</p>
+              <ul className="list-disc list-inside mt-4">
+                <li>Exhibition space</li>
+                <li>Branding opportunities</li>
+                <li>Delegate passes</li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        {registrationType === "participant" ? (
-          <div className="space-y-6">
-            <div className="flex justify-center">
-              <RadioGroup
-                defaultValue="individual"
-                onValueChange={setParticipantType}
-                className="flex space-x-4"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="individual" id="individual" />
-                  <Label htmlFor="individual">Individual</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="group" id="group" />
-                  <Label htmlFor="group">Group</Label>
-                </div>
-              </RadioGroup>
-            </div>
-
-            {participantType === "individual" && (
-              <div className="p-4 border rounded-md space-y-4">
-                <div>
-                  <h3 className="text-lg font-bold">Individual Participant</h3>
-                  {isYouth ? (
-                    <p>
-                      Youth Registration: $100 (
-                      {formatAsNaira(100 * USD_TO_NGN_RATE)})
-                    </p>
-                  ) : (
-                    <>
-                      <p>
-                        Early Bird Registration: $150 (
-                        {formatAsNaira(150 * USD_TO_NGN_RATE)}) (Closes on 20th
-                        September 2025)
-                      </p>
-                      <p>
-                        Regular Registration: $200 (
-                        {formatAsNaira(200 * USD_TO_NGN_RATE)})
-                      </p>
-                    </>
-                  )}
-                  <h4 className="font-semibold mt-2">Benefits include:</h4>
-                  <ul className="list-disc list-inside">
-                    <li>Breakout workshops and B2B</li>
-                    <li>Summit kit</li>
-                    <li>Networking lunch and coffee break</li>
-                  </ul>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="is-youth"
-                    onCheckedChange={(checked) =>
-                      setIsYouth(checked as boolean)
-                    }
-                  />
-                  <Label htmlFor="is-youth">
-                    Are you registering as a youth?
-                  </Label>
-                </div>
-              </div>
-            )}
-
-            {participantType === "group" && (
-              <div className="p-4 border rounded-md space-y-4">
-                <h3 className="text-lg font-bold">Group Participation</h3>
+        {registrationType === "participant" && (
+          <form
+            ref={formRef}
+            className="mt-8 space-y-6"
+            onSubmit={handleNextStep}
+          >
+            <div className="rounded-md shadow-sm space-y-4 p-6 bg-white">
+              <h3 className="text-xl font-bold mb-4">
+                {participantType === "individual"
+                  ? "Individual Registration"
+                  : "Group Registration"}
+              </h3>
+              {participantType === "group" && (
                 <div>
                   <Label htmlFor="group-size">Select Group Size</Label>
                   <select
@@ -292,61 +303,119 @@ const RegisterPage = () => {
                       Group of 5 ($700 | {formatAsNaira(700 * USD_TO_NGN_RATE)})
                     </option>
                     <option value={10}>
-                      Group of 10 ($1500 |{" "}
-                      {formatAsNaira(1500 * USD_TO_NGN_RATE)})
+                      Group of 10 ($1300 |{" "}
+                      {formatAsNaira(1300 * USD_TO_NGN_RATE)})
                     </option>
                   </select>
                 </div>
-                <h4 className="font-semibold mt-2">
-                  Additional group benefits:
-                </h4>
-                <ul className="list-disc list-inside">
-                  <li>All individual participant entitlements</li>
-                  <li>Reserved seating for groups of 10 or more</li>
-                  <li>Recognition in summit materials (upon request)</li>
-                </ul>
-              </div>
-            )}
-
-            <form className="mt-8 space-y-6" onSubmit={handleNextStep}>
-              <div className="rounded-md shadow-sm space-y-4">
-                <Input
-                  name="full-name"
-                  type="text"
-                  required
-                  placeholder="Full Name"
-                />
-                <Input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email Address"
-                />
-                <Input
-                  name="phone"
-                  type="tel"
-                  placeholder="Phone Number (WhatsApp preferred)"
-                  required
-                />
-                <Input
-                  name="organization"
-                  type="text"
-                  required
-                  placeholder="Organization / Business / Institution"
-                />
-                <Input
-                  name="role"
-                  type="text"
-                  required
-                  placeholder="Role / Title"
-                />
-                <Input
-                  name="sector-of-focus"
-                  type="text"
-                  required
-                  placeholder="Sector of Focus (Agriculture, Power, Solid Minerals, ICT, Other)"
-                />
-              </div>
+              )}
+              <Input
+                name="full-name"
+                type="text"
+                required
+                placeholder="Full Name"
+              />
+              <Input
+                name="email"
+                type="email"
+                required
+                placeholder="Email Address"
+              />
+              <Input
+                name="phone"
+                type="tel"
+                placeholder="Phone Number (WhatsApp preferred)"
+                required
+              />
+              <Input
+                name="organization"
+                type="text"
+                required
+                placeholder="Organization / Business / Institution"
+              />
+              <Input
+                name="role"
+                type="text"
+                required
+                placeholder="Role / Title"
+              />
+              <select
+                name="sector-of-focus"
+                required
+                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="">Select Sector of Focus</option>
+                <option value="ICT">ICT</option>
+                <option value="Mining">Mining</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Power">Power</option>
+                <option value="Other">Other</option>
+              </select>
+              {participantType === "individual" && (
+                <>
+                  <div className="space-y-2">
+                    <Label>
+                      Are you an SME owner, policymaker, investor, or
+                      technocrat?
+                    </Label>
+                    <RadioGroup
+                      name="sme-owner-policymaker-investor-technocrat"
+                      required
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="sme-owner" id="sme-owner" />
+                        <Label htmlFor="sme-owner">SME Owner</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="policymaker" id="policymaker" />
+                        <Label htmlFor="policymaker">Policymaker</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="investor" id="investor" />
+                        <Label htmlFor="investor">Investor</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="technocrat" id="technocrat" />
+                        <Label htmlFor="technocrat">Technocrat</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="impact">
+                      What impact have you made in your sector? (short
+                      paragraph)
+                    </Label>
+                    <textarea
+                      id="impact"
+                      name="impact"
+                      required
+                      className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      maxLength={100}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="why-attend">
+                      Why do you want to attend physically? (short paragraph)
+                    </Label>
+                    <textarea
+                      id="why-attend"
+                      name="why-attend"
+                      required
+                      className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      maxLength={100}
+                    />
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Due to limited physical seating, priority will be given to
+                    technocrats, SMEs, investors, and policymakers directly
+                    engaged in Northern Nigeria’s investment and
+                    industrialization. All other registrants will receive
+                    live-stream access.
+                  </p>
+                </>
+              )}
+            </div>
+            {participantType === "group" && (
               <div className="p-4 border rounded-md bg-gray-100">
                 <h3 className="text-lg font-bold">Important Notes</h3>
                 <ul className="list-disc list-inside text-sm">
@@ -361,16 +430,20 @@ const RegisterPage = () => {
                   </li>
                 </ul>
               </div>
-              <div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Processing..." : "Proceed to Payment"}
-                </Button>
-              </div>
-            </form>
-          </div>
-        ) : registrationType === "exhibitor" ? (
-          <ExhibitionBooth />
-        ) : null}
+            )}
+            <div>
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading
+                  ? "Processing..."
+                  : participantType === "individual"
+                  ? "Submit"
+                  : "Proceed to Payment"}
+              </Button>
+            </div>
+          </form>
+        )}
+
+        {registrationType === "exhibitor" && <ExhibitionBooth />}
       </div>
     </div>
   );
