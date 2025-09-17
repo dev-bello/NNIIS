@@ -1,0 +1,5 @@
+# supabase/config.toml
+
+[functions.qoreid-verify]
+  entrypoint = "./functions/qoreid-verify/index.ts"
+  import_map = "./functions/import_map.json"

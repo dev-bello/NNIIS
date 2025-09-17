@@ -91,9 +91,12 @@ const Header = () => {
                 Logout
               </Button>
             ) : (
-              // Login disabled until users are selected
-              <Button variant="outline" size="default" disabled>
-                {/* Login disabled */}
+              <Button
+                variant="outline"
+                size="default"
+                onClick={() => navigate("/login")}
+              >
+                Login
               </Button>
             )}
           </div>
@@ -174,14 +177,13 @@ const Header = () => {
                   Logout
                 </Button>
               ) : (
-                // Login disabled until users are selected
                 <Button
                   variant="outline"
                   size="default"
                   className="w-full"
-                  disabled
+                  onClick={() => navigate("/login")}
                 >
-                  {/* Login disabled */}
+                  Login
                 </Button>
               )}
             </div>

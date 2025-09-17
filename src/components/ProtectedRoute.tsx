@@ -24,7 +24,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   }
 
   if (!session) {
-    return <Navigate to="/register" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
