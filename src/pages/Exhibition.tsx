@@ -1,5 +1,13 @@
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const sponsorshipTiers = [
   {
@@ -48,7 +56,24 @@ const sponsorshipTiers = [
   },
 ];
 
+const booths = [
+  { id: 1, size: "2m x 2m", available: true, package: "Exhibitor" },
+  { id: 2, size: "2m x 2m", available: true, package: "Exhibitor" },
+  { id: 3, size: "3m x 3m", available: false, package: "Silver" },
+  { id: 4, size: "3m x 3m", available: true, package: "Silver" },
+  { id: 5, size: "4m x 4m", available: true, package: "Gold" },
+  { id: 6, size: "4m x 4m", available: false, package: "Gold" },
+  { id: 7, size: "4m x 4m", available: true, package: "Gold" },
+  { id: 8, size: "4m x 4m", available: true, package: "Gold" },
+  { id: 9, size: "6m x 6m", available: false, package: "Platinum" },
+  { id: 10, size: "6m x 6m", available: true, package: "Platinum" },
+  { id: 11, size: "6m x 6m", available: true, package: "Platinum" },
+  { id: 12, size: "6m x 6m", available: true, package: "Platinum" },
+];
+
 const ExhibitionPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div>
       <section className="relative bg-gray-800 text-white py-20 sm:py-32">
@@ -126,9 +151,58 @@ const ExhibitionPage = () => {
             </div>
 
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 text-center">
-                Sponsorship Tiers
-              </h2>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                  Sponsorship Tiers
+                </h2>
+                <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                  <DialogTrigger asChild>
+                    <Button>View Available Booths</Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl">
+                    <DialogHeader>
+                      <DialogTitle>Available Exhibition Booths</DialogTitle>
+                    </DialogHeader>
+                    <div className="max-h-[70vh] overflow-y-auto p-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-4">
+                        {booths.map((booth) => (
+                          <div
+                            key={booth.id}
+                            className={`rounded-lg shadow-lg p-6 flex flex-col justify-between transition-transform transform hover:scale-105 ${
+                              booth.available ? "bg-white" : "bg-gray-200"
+                            }`}
+                          >
+                            <div>
+                              <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-xl font-bold text-gray-800">
+                                  Booth {booth.id}
+                                </h3>
+                                <span
+                                  className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                                    booth.available
+                                      ? "bg-green-100 text-green-800"
+                                      : "bg-red-100 text-red-800"
+                                  }`}
+                                >
+                                  {booth.available ? "Available" : "Taken"}
+                                </span>
+                              </div>
+                              <p className="text-gray-600">
+                                <span className="font-semibold">Size:</span>{" "}
+                                {booth.size}
+                              </p>
+                              <p className="text-gray-600">
+                                <span className="font-semibold">Package:</span>{" "}
+                                {booth.package}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
               <div className="flex flex-wrap justify-center gap-8">
                 {sponsorshipTiers.map((tier, index) => (
                   <div

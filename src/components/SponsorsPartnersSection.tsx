@@ -63,6 +63,10 @@ const SponsorsPartnersSection = () => {
       name: "NASENI",
       logo: "/images/logos/naseni.png",
     },
+    {
+      name: "NACCIMA",
+      logo: "/images/logos/naccima.jpeg",
+    },
   ];
 
   useEffect(() => {

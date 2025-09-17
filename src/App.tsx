@@ -37,8 +37,8 @@ const App = () => (
             path="/registration-success"
             element={<RegistrationSuccessPage />}
           />
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          {/* <Route path="/verify-otp" element={<VerifyOtpPage />} /> */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/verify-otp" element={<VerifyOtpPage />} />
           <Route path="/selection-status" element={<SelectionStatusPage />} />
           <Route path="/state/:slug" element={<StateDetailPage />} />
           <Route

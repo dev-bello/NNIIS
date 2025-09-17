@@ -7,6 +7,12 @@ const KeySpeakersSection = () => {
       image: "/images/tinubu.png",
     },
     {
+      name: "H.E. Kashim Shettima, GCON",
+      title: "Vice President, Federal Republic of Nigeria",
+      role: "Guest of Honour",
+      image: "/images/kashim.webp",
+    },
+    {
       name: "Prof. Ango Abdullahi, CON",
       title: "Convener, Northern Elders Forum",
       role: "Convener",
