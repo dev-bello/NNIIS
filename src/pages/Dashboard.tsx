@@ -3,6 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
+import { saveSvgAsPng } from "save-svg-as-png";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import ExhibitionBooth from "@/components/ExhibitionBooth";
@@ -95,6 +96,13 @@ const DashboardPage = () => {
     }
   };
 
+  const handleDownload = () => {
+    const svg = document.getElementById("qr-code");
+    if (svg) {
+      saveSvgAsPng(svg, "NNIIS25-qr-code.png");
+    }
+  };
+
   const allSelectableItems = [
     ...config.thematicAreas.map((area) => area.title),
     ...config.masterclasses.map((mc) => mc.title),
@@ -166,8 +174,16 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="mt-8 flex flex-col items-center">
-          {user?.email && <QRCodeSVG value={user.email} size={128} />}
-          <Button variant="outline" className="mt-4">
+          {user?.email && (
+            <QRCodeSVG
+              id="qr-code"
+              value={`NAME; ${user.full_name ? user.full_name : ""} ${
+                user.company_name ? user.company_name : ""
+              } STATUS: Registered for #NNIIS25 ✅`}
+              size={128}
+            />
+          )}
+          <Button variant="outline" className="mt-4" onClick={handleDownload}>
             Download
           </Button>
           <p className="mt-2 text-center text-sm text-gray-600">

@@ -107,7 +107,7 @@ const RegisterPage = () => {
       }
 
       toast.success(
-        "Registration successful! Please check your email to confirm."
+        "Registration successful! Please check your email, including your spam or junk folder, to confirm."
       );
       setFormData({});
       const form = document.querySelector("form");
