@@ -10,6 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { usePaystackPayment } from "react-paystack";
 import { Checkbox } from "@/components/ui/checkbox";
 import RegisterHeroSection from "@/components/RegisterHeroSection";
+import Footer from "@/components/Footer";
 
 type FormData = {
   "full-name"?: string;
@@ -30,7 +31,7 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({});
   const [participantType, setParticipantType] = useState("individual");
-  const [groupSize, setGroupSize] = useState(5);
+  const [groupSize, setGroupSize] = useState(1);
   const [isPaymentTriggered, setIsPaymentTriggered] = useState(false);
   const [isYouth, setIsYouth] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -60,7 +61,13 @@ const RegisterPage = () => {
     if (participantType === "individual") {
       amount = isYouth ? 100 : now < earlyBirdDeadline ? 150 : 200;
     } else if (participantType === "group") {
-      amount = groupSize === 5 ? 700 : 1300;
+      if (groupSize === 1) {
+        amount = 150;
+      } else if (groupSize === 5) {
+        amount = 700;
+      } else if (groupSize === 10) {
+        amount = 1300;
+      }
     } else if (participantType === "youth") {
       amount = 100;
     }
@@ -148,19 +155,15 @@ const RegisterPage = () => {
       groupSize: participantType === "group" ? groupSize : undefined,
     };
 
-    if (participantType === "individual") {
-      handleAttendeeSubmit(newData);
-    } else {
-      if (!import.meta.env.VITE_PAYSTACK_PUBLIC_KEY) {
-        toast.error(
-          "Paystack public key is not configured. Please check your environment variables."
-        );
-        setIsLoading(false);
-        return;
-      }
-      setFormData(newData);
-      setIsPaymentTriggered(true);
+    if (!import.meta.env.VITE_PAYSTACK_PUBLIC_KEY) {
+      toast.error(
+        "Paystack public key is not configured. Please check your environment variables."
+      );
+      setIsLoading(false);
+      return;
     }
+    setFormData(newData);
+    setIsPaymentTriggered(true);
   };
 
   return (
@@ -233,7 +236,7 @@ const RegisterPage = () => {
               }`}
             >
               <h3 className="text-2xl font-bold mb-4">
-                Register as a Company, Organization and Groups
+                Register as a Delegate
               </h3>
               <ul className="list-disc list-inside mt-4">
                 <li>All individual benefits</li>
@@ -299,6 +302,9 @@ const RegisterPage = () => {
                     onChange={(e) => setGroupSize(parseInt(e.target.value))}
                     className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
+                    <option value={1}>
+                      Singlular ($150 | {formatAsNaira(150 * USD_TO_NGN_RATE)})
+                    </option>
                     <option value={5}>
                       Group of 5 ($700 | {formatAsNaira(700 * USD_TO_NGN_RATE)})
                     </option>
@@ -433,11 +439,7 @@ const RegisterPage = () => {
             )}
             <div>
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading
-                  ? "Processing..."
-                  : participantType === "individual"
-                  ? "Submit"
-                  : "Proceed to Payment"}
+                {isLoading ? "Processing..." : "Proceed to Payment"}
               </Button>
             </div>
           </form>
@@ -445,6 +447,7 @@ const RegisterPage = () => {
 
         {registrationType === "exhibitor" && <ExhibitionBooth />}
       </div>
+      <Footer />
     </div>
   );
 };
