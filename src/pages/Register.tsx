@@ -12,7 +12,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import RegisterHeroSection from "@/components/RegisterHeroSection";
 import Footer from "@/components/Footer";
 import { countries } from "@/data/countries";
-import { STATES_DATA } from "@/data/states";
 
 type FormData = {
   "full-name"?: string;
