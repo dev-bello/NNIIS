@@ -106,25 +106,31 @@ const RegisterPage = () => {
       state: data.state,
       country: data.country,
       sector_of_focus: data["sector-of-focus"],
-      thematic_areas: data.thematic_areas,
-      interests: data.interests,
       user_type_selection: data["sme-owner-policymaker-investor-technocrat"],
       impact: data.impact,
       why_attend: data["why-attend"],
     };
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email: submissionData.email,
         password: Math.random().toString(36).slice(-8),
-        options: {
-          data: submissionData,
-        },
       });
 
-      if (error) {
-        toast.error(error.message);
+      if (authError) {
+        toast.error(authError.message);
         return;
+      }
+
+      if (authData.user) {
+        const { error: insertError } = await supabase
+          .from("new_registrations")
+          .insert([{ ...submissionData, user_id: authData.user.id }]);
+
+        if (insertError) {
+          toast.error(insertError.message);
+          return;
+        }
       }
 
       toast.success(
@@ -395,45 +401,7 @@ const RegisterPage = () => {
                 <option value="Power">Power</option>
                 <option value="Other">Other</option>
               </select>
-              <div className="space-y-2">
-                <Label>Thematic Areas of Interest</Label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    "ICT",
-                    "Mining",
-                    "Agriculture",
-                    "Power",
-                    "Infrastructure",
-                    "Finance",
-                  ].map((area) => (
-                    <div key={area} className="flex items-center space-x-2">
-                      <Checkbox name="thematic_areas" value={area} id={area} />
-                      <Label htmlFor={area}>{area}</Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label>What are your interests?</Label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    "Networking",
-                    "Investment",
-                    "Policy",
-                    "B2B Meetings",
-                    "Entrepreneurship",
-                  ].map((interest) => (
-                    <div key={interest} className="flex items-center space-x-2">
-                      <Checkbox
-                        name="interests"
-                        value={interest}
-                        id={interest}
-                      />
-                      <Label htmlFor={interest}>{interest}</Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
+
               {participantType === "individual" && (
                 <>
                   <div className="space-y-2">
