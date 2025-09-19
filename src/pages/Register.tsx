@@ -11,6 +11,8 @@ import { usePaystackPayment } from "react-paystack";
 import { Checkbox } from "@/components/ui/checkbox";
 import RegisterHeroSection from "@/components/RegisterHeroSection";
 import Footer from "@/components/Footer";
+import { countries } from "@/data/countries";
+import { STATES_DATA } from "@/data/states";
 
 type FormData = {
   "full-name"?: string;
@@ -18,6 +20,10 @@ type FormData = {
   phone?: string;
   organization?: string;
   role?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  country?: string;
   "sector-of-focus"?: string;
   "sme-owner-policymaker-investor-technocrat"?: string;
   impact?: string;
@@ -34,6 +40,7 @@ const RegisterPage = () => {
   const [groupSize, setGroupSize] = useState(1);
   const [isPaymentTriggered, setIsPaymentTriggered] = useState(false);
   const [isYouth, setIsYouth] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("Nigeria");
   const formRef = useRef<HTMLFormElement>(null);
 
   const USD_TO_NGN_RATE = 1489.57;
@@ -93,6 +100,10 @@ const RegisterPage = () => {
       phone: data.phone,
       organization: data.organization,
       role: data.role,
+      address: data.address,
+      city: data.city,
+      state: data.state,
+      country: data.country,
       sector_of_focus: data["sector-of-focus"],
       user_type_selection: data["sme-owner-policymaker-investor-technocrat"],
       impact: data.impact,
@@ -345,6 +356,28 @@ const RegisterPage = () => {
                 required
                 placeholder="Role / Title"
               />
+              <Input
+                name="address"
+                type="text"
+                required
+                placeholder="Address"
+              />
+              <Input name="city" type="text" required placeholder="City" />
+              <select
+                name="country"
+                required
+                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value)}
+              >
+                <option value="">Select Country</option>
+                {countries.map((country) => (
+                  <option key={country.value} value={country.value}>
+                    {country.label}
+                  </option>
+                ))}
+              </select>
+              <Input name="state" type="text" required placeholder="State" />
               <select
                 name="sector-of-focus"
                 required
@@ -438,9 +471,29 @@ const RegisterPage = () => {
               </div>
             )}
             <div>
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Processing..." : "Proceed to Payment"}
-              </Button>
+              {participantType === "individual" ? (
+                <Button
+                  type="button"
+                  className="w-full"
+                  disabled={isLoading}
+                  onClick={() => {
+                    const form = formRef.current;
+                    if (form) {
+                      const formEntries = new FormData(form);
+                      const data = Object.fromEntries(
+                        formEntries.entries()
+                      ) as FormData;
+                      handleAttendeeSubmit(data);
+                    }
+                  }}
+                >
+                  {isLoading ? "Processing..." : "Submit"}
+                </Button>
+              ) : (
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? "Processing..." : "Proceed to Payment"}
+                </Button>
+              )}
             </div>
           </form>
         )}
