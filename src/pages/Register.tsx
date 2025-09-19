@@ -24,6 +24,8 @@ type FormData = {
   state?: string;
   country?: string;
   "sector-of-focus"?: string;
+  thematic_areas?: string[];
+  interests?: string[];
   "sme-owner-policymaker-investor-technocrat"?: string;
   impact?: string;
   "why-attend"?: string;
@@ -104,6 +106,8 @@ const RegisterPage = () => {
       state: data.state,
       country: data.country,
       sector_of_focus: data["sector-of-focus"],
+      thematic_areas: data.thematic_areas,
+      interests: data.interests,
       user_type_selection: data["sme-owner-policymaker-investor-technocrat"],
       impact: data.impact,
       why_attend: data["why-attend"],
@@ -156,8 +160,10 @@ const RegisterPage = () => {
     e.preventDefault();
     setIsLoading(true);
     const form = e.currentTarget;
-    const formEntries = new FormData(form);
-    const data = Object.fromEntries(formEntries.entries()) as FormData;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries()) as any;
+    data.thematic_areas = formData.getAll("thematic_areas");
+    data.interests = formData.getAll("interests");
 
     const newData = {
       ...data,
@@ -389,6 +395,45 @@ const RegisterPage = () => {
                 <option value="Power">Power</option>
                 <option value="Other">Other</option>
               </select>
+              <div className="space-y-2">
+                <Label>Thematic Areas of Interest</Label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    "ICT",
+                    "Mining",
+                    "Agriculture",
+                    "Power",
+                    "Infrastructure",
+                    "Finance",
+                  ].map((area) => (
+                    <div key={area} className="flex items-center space-x-2">
+                      <Checkbox name="thematic_areas" value={area} id={area} />
+                      <Label htmlFor={area}>{area}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>What are your interests?</Label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    "Networking",
+                    "Investment",
+                    "Policy",
+                    "B2B Meetings",
+                    "Entrepreneurship",
+                  ].map((interest) => (
+                    <div key={interest} className="flex items-center space-x-2">
+                      <Checkbox
+                        name="interests"
+                        value={interest}
+                        id={interest}
+                      />
+                      <Label htmlFor={interest}>{interest}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
               {participantType === "individual" && (
                 <>
                   <div className="space-y-2">
@@ -478,10 +523,12 @@ const RegisterPage = () => {
                   onClick={() => {
                     const form = formRef.current;
                     if (form) {
-                      const formEntries = new FormData(form);
+                      const formData = new FormData(form);
                       const data = Object.fromEntries(
-                        formEntries.entries()
-                      ) as FormData;
+                        formData.entries()
+                      ) as any;
+                      data.thematic_areas = formData.getAll("thematic_areas");
+                      data.interests = formData.getAll("interests");
                       handleAttendeeSubmit(data);
                     }
                   }}
