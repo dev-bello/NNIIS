@@ -264,6 +264,7 @@ const RegisterPage = () => {
                 <li>All individual benefits</li>
                 <li>Reserved seating</li>
                 <li>Recognition</li>
+                <li>Invitation to Gala Night</li>
               </ul>
             </div>
           </div>
@@ -298,6 +299,7 @@ const RegisterPage = () => {
                 <li>Exhibition space</li>
                 <li>Branding opportunities</li>
                 <li>Delegate passes</li>
+                <li>Exclusive Gala Night access</li>
               </ul>
             </div>
           </div>
