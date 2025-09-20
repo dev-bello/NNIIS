@@ -263,6 +263,8 @@ const RegisterPage = () => {
               <ul className="list-disc list-inside mt-4">
                 <li>All individual benefits</li>
                 <li>Reserved seating</li>
+                <li>Matchmaking sessions/li>
+                <li>Access to deal room</li>
                 <li>Recognition</li>
                 <li>Invitation to Gala Night</li>
               </ul>
@@ -296,6 +298,7 @@ const RegisterPage = () => {
               </h3>
               <p>Packages available for sponsorship and exhibition booths.</p>
               <ul className="list-disc list-inside mt-4">
+                <li>Premium benefits</li>
                 <li>Exhibition space</li>
                 <li>Branding opportunities</li>
                 <li>Delegate passes</li>
