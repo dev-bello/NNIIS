@@ -224,9 +224,9 @@ const RegisterPage = () => {
                 Register as an Individual
               </h3>
               <ul className="list-disc list-inside mt-4">
-                <li>Breakout workshops and B2B</li>
-                <li>Summit kit</li>
-                <li>Networking lunch</li>
+                <li>Individual Registration</li>
+                <li>Standard Summit Kit</li>
+               
               </ul>
             </div>
           </div>
@@ -261,11 +261,11 @@ const RegisterPage = () => {
                 Register as a Delegate
               </h3>
               <ul className="list-disc list-inside mt-4">
-                <li>All individual benefits</li>
-                <li>Reserved seating</li>
-                <li>Matchmaking sessions/li>
-                <li>Access to deal room</li>
+                <li>Reserved Seating</li>
+                <li>Exclusive Matchmaking Sessions/li>
+                <li>Deal-Room Access</li>
                 <li>Recognition</li>
+                <li>Networking Lunch</li>
                 <li>Invitation to Gala Night</li>
               </ul>
             </div>
@@ -298,11 +298,14 @@ const RegisterPage = () => {
               </h3>
               <p>Packages available for sponsorship and exhibition booths.</p>
               <ul className="list-disc list-inside mt-4">
-                <li>Premium benefits</li>
-                <li>Exhibition space</li>
-                <li>Branding opportunities</li>
-                <li>Delegate passes</li>
-                <li>Exclusive Gala Night access</li>
+                <li>Premium Benefits</li>
+                <li>Prime Exhibition Space</li>
+                <li>Sponsorship or Exhibition Packages</li>
+                <li>Branding Opportunities</li>
+                <li>Priority Speaking Opportunities</li>
+                <li>Delegate Passes</li>
+                <li>Customized Partnership Benefits</li>
+                <li>Exclusive Gala Night Access</li>
               </ul>
             </div>
           </div>
