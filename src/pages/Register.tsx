@@ -226,7 +226,7 @@ const RegisterPage = () => {
               <ul className="list-disc list-inside mt-4">
                 <li>Individual Registration</li>
                 <li>Standard Summit Kit</li>
-               
+                <li>Access to Masterclass Sessions</li>
               </ul>
             </div>
           </div>
@@ -261,8 +261,9 @@ const RegisterPage = () => {
                 Register as a Delegate
               </h3>
               <ul className="list-disc list-inside mt-4">
+                <li>All Individual Benefits </li>
                 <li>Reserved Seating</li>
-                <li>Exclusive Matchmaking Sessions/li>
+                <li>Exclusive Matchmaking Sessions</li>
                 <li>Deal-Room Access</li>
                 <li>Recognition</li>
                 <li>Networking Lunch</li>
@@ -306,6 +307,7 @@ const RegisterPage = () => {
                 <li>Delegate Passes</li>
                 <li>Customized Partnership Benefits</li>
                 <li>Exclusive Gala Night Access</li>
+                <li>Pre and Post-Event Promotion</li>
               </ul>
             </div>
           </div>
