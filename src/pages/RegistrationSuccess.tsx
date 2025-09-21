@@ -40,7 +40,7 @@ const RegistrationSuccessPage = () => {
             setIsVerified(true);
             setEmailSent(true);
             toast.success(
-              "Email verified successfully! Check your email for next steps."
+              "Email verified successfully! Wait for confirmation of attendance."
             );
 
             // The trigger should automatically send the confirmation email
@@ -109,7 +109,7 @@ const RegistrationSuccessPage = () => {
               {emailSent && (
                 <div className="mt-3 flex items-center justify-center text-sm text-green-600">
                   <Clock className="h-4 w-4 mr-1" />
-                  <span>Confirmation email sent</span>
+                  <span>Confirmation email will be sent</span>
                 </div>
               )}
             </div>
