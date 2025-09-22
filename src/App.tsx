@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import B2BPage from "./pages/B2B";
 import StateDetailPage from "./pages/StateDetail";
 import SelectionStatusPage from "./pages/SelectionStatus";
+import VolunteerClose from "./pages/VolunteerClose";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +33,8 @@ const App = () => (
           <Route path="/exhibition" element={<ExhibitionPage />} />
           {/* <Route path="/masterclasses" element={<MasterclassesPage />} /> */}
           <Route path="/b2b" element={<B2BPage />} />
-          <Route path="/volunteer" element={<VolunteerPage />} />
+          {/* <Route path="/volunteer" element={<VolunteerPage />} /> */}
+          <Route path="/volunteer" element={<VolunteerClose />} />
           <Route
             path="/registration-success"
             element={<RegistrationSuccessPage />}
@@ -41,6 +43,7 @@ const App = () => (
           <Route path="/verify-otp" element={<VerifyOtpPage />} />
           <Route path="/selection-status" element={<SelectionStatusPage />} />
           <Route path="/state/:slug" element={<StateDetailPage />} />
+
           <Route
             path="/dashboard"
             element={

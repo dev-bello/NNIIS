@@ -44,7 +44,7 @@ const RegisterPage = () => {
   const [selectedCountry, setSelectedCountry] = useState("Nigeria");
   const formRef = useRef<HTMLFormElement>(null);
 
-  const USD_TO_NGN_RATE = 1489.57;
+  const USD_TO_NGN_RATE = 1495.57;
 
   const formatAsNaira = (amount: number) => {
     return new Intl.NumberFormat("en-NG", {
