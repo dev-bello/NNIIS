@@ -451,7 +451,7 @@ const RegisterPage = () => {
               {participantType === "individual" ? (
                 <Button
                   type="button"
-                  className="w-full"
+                  className="w-full hidden"
                   disabled={isLoading}
                   onClick={() => {
                     const form = formRef.current;
