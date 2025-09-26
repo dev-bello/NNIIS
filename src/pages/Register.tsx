@@ -202,7 +202,6 @@ const RegisterPage = () => {
                 : ""
             }`}
             onClick={() => {
-              setRegistrationType("participant");
               setParticipantType("individual");
               formRef.current?.scrollIntoView({ behavior: "smooth" });
             }}
@@ -321,9 +320,20 @@ const RegisterPage = () => {
           >
             <div className="rounded-md shadow-sm space-y-4 p-6 bg-white">
               <h3 className="text-xl font-bold mb-4">
-                {participantType === "individual"
-                  ? "Individual Registration"
-                  : "Group Registration"}
+                {participantType === "individual" ? (
+                  <div className="text-center py-8">
+                    <h3 className="text-2xl font-bold text-gray-800">
+                      Individual Registration Closed
+                    </h3>
+                    <p className="mt-4 text-gray-600">
+                      The maximum capacity for individual registration has been
+                      reached. Please register as a delegate or exhibitor to
+                      attend.
+                    </p>
+                  </div>
+                ) : (
+                  "Group Registration"
+                )}
               </h3>
               {participantType === "group" && (
                 <div>
@@ -347,132 +357,77 @@ const RegisterPage = () => {
                   </select>
                 </div>
               )}
-              <Input
-                name="full-name"
-                type="text"
-                required
-                placeholder="Full Name"
-              />
-              <Input
-                name="email"
-                type="email"
-                required
-                placeholder="Email Address"
-              />
-              <Input
-                name="phone"
-                type="tel"
-                placeholder="Phone Number (WhatsApp preferred)"
-                required
-              />
-              <Input
-                name="organization"
-                type="text"
-                required
-                placeholder="Organization / Business / Institution"
-              />
-              <Input
-                name="role"
-                type="text"
-                required
-                placeholder="Role / Title"
-              />
-              <Input
-                name="address"
-                type="text"
-                required
-                placeholder="Address"
-              />
-              <Input name="city" type="text" required placeholder="City" />
-              <select
-                name="country"
-                required
-                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                value={selectedCountry}
-                onChange={(e) => setSelectedCountry(e.target.value)}
-              >
-                <option value="">Select Country</option>
-                {countries.map((country) => (
-                  <option key={country.value} value={country.value}>
-                    {country.label}
-                  </option>
-                ))}
-              </select>
-              <Input name="state" type="text" required placeholder="State" />
-              <select
-                name="sector-of-focus"
-                required
-                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <option value="">Select Sector of Focus</option>
-                <option value="ICT">ICT</option>
-                <option value="Mining">Mining</option>
-                <option value="Agriculture">Agriculture</option>
-                <option value="Power">Power</option>
-                <option value="Other">Other</option>
-              </select>
-
-              {participantType === "individual" && (
+              {participantType !== "individual" && (
                 <>
-                  <div className="space-y-2">
-                    <Label>
-                      Are you an SME owner, policymaker, investor, or
-                      technocrat?
-                    </Label>
-                    <RadioGroup
-                      name="sme-owner-policymaker-investor-technocrat"
-                      required
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="sme-owner" id="sme-owner" />
-                        <Label htmlFor="sme-owner">SME Owner</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="policymaker" id="policymaker" />
-                        <Label htmlFor="policymaker">Policymaker</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="investor" id="investor" />
-                        <Label htmlFor="investor">Investor</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="technocrat" id="technocrat" />
-                        <Label htmlFor="technocrat">Technocrat</Label>
-                      </div>
-                    </RadioGroup>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="impact">
-                      What impact have you made in your sector? (short
-                      paragraph)
-                    </Label>
-                    <textarea
-                      id="impact"
-                      name="impact"
-                      required
-                      className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      maxLength={100}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="why-attend">
-                      Why do you want to attend physically? (short paragraph)
-                    </Label>
-                    <textarea
-                      id="why-attend"
-                      name="why-attend"
-                      required
-                      className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      maxLength={100}
-                    />
-                  </div>
-                  <p className="text-sm text-gray-500">
-                    Due to limited physical seating, priority will be given to
-                    technocrats, SMEs, investors, and policymakers directly
-                    engaged in Northern Nigeria’s investment and
-                    industrialization. All other registrants will receive
-                    live-stream access.
-                  </p>
+                  <Input
+                    name="full-name"
+                    type="text"
+                    required
+                    placeholder="Full Name"
+                  />
+                  <Input
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Email Address"
+                  />
+                  <Input
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone Number (WhatsApp preferred)"
+                    required
+                  />
+                  <Input
+                    name="organization"
+                    type="text"
+                    required
+                    placeholder="Organization / Business / Institution"
+                  />
+                  <Input
+                    name="role"
+                    type="text"
+                    required
+                    placeholder="Role / Title"
+                  />
+                  <Input
+                    name="address"
+                    type="text"
+                    required
+                    placeholder="Address"
+                  />
+                  <Input name="city" type="text" required placeholder="City" />
+                  <select
+                    name="country"
+                    required
+                    className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    value={selectedCountry}
+                    onChange={(e) => setSelectedCountry(e.target.value)}
+                  >
+                    <option value="">Select Country</option>
+                    {countries.map((country) => (
+                      <option key={country.value} value={country.value}>
+                        {country.label}
+                      </option>
+                    ))}
+                  </select>
+                  <Input
+                    name="state"
+                    type="text"
+                    required
+                    placeholder="State"
+                  />
+                  <select
+                    name="sector-of-focus"
+                    required
+                    className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="">Select Sector of Focus</option>
+                    <option value="ICT">ICT</option>
+                    <option value="Mining">Mining</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Power">Power</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </>
               )}
             </div>
@@ -511,7 +466,7 @@ const RegisterPage = () => {
                     }
                   }}
                 >
-                  {isLoading ? "Processing..." : "Submit"}
+                  {isLoading ? "Processing..." : ""}
                 </Button>
               ) : (
                 <Button type="submit" className="w-full" disabled={isLoading}>

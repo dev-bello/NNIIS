@@ -8,6 +8,7 @@ import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import ExhibitionBooth from "@/components/ExhibitionBooth";
 import { config } from "@/lib/config";
+import DelegateDashboard from "./DelegateDashboard";
 
 function getCountdownToSept29() {
   const targetDate = new Date("2025-09-29T00:00:00");
@@ -37,8 +38,22 @@ const DashboardPage = () => {
       } = await supabase.auth.getSession();
 
       if (session?.user) {
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", session.user.id)
+          .single();
+
+        if (error) {
+          toast.error("Could not load user profile.");
+          console.error(error);
+          setLoading(false);
+          return;
+        }
+
         const userProfile = {
           ...session.user.user_metadata,
+          ...profile,
           email: session.user.email,
           id: session.user.id,
         };
@@ -127,6 +142,10 @@ const DashboardPage = () => {
     );
   }
 
+  if (user?.class === "delegate") {
+    return <DelegateDashboard user={user} />;
+  }
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
       <aside className="w-full md:w-1/4 bg-white p-8">
@@ -135,9 +154,7 @@ const DashboardPage = () => {
             <img src="/images/NNIIS.jpg" alt="Arewa Tech Fest" />
           </div>
           <h1 className="text-2xl font-bold">
-            Hello!{" "}
-            {user?.full_name?.split(" ")[0] ||
-              user?.company_name?.split(" ")[0]}
+            Hello! {user?.name?.split(" ")[0] || user?.name?.split(" ")[0]}
           </h1>
           <p className="text-gray-600">
             Thank you for registering for the
@@ -150,10 +167,9 @@ const DashboardPage = () => {
         <div className="mt-8">
           <h2 className="font-semibold">Your registration details</h2>
           <div className="mt-4 space-y-2">
-            {user?.full_name && (
+            {user?.name && (
               <p>
-                <span className="font-semibold">Full Name</span>{" "}
-                {user.full_name}
+                <span className="font-semibold">Full Name</span> {user.name}
               </p>
             )}
             {user?.company_name && (
@@ -165,12 +181,17 @@ const DashboardPage = () => {
             <p>
               <span className="font-semibold">Email</span> {user?.email}
             </p>
-            <p>
-              <span className="font-semibold">Phone:</span> {user?.phone}
-            </p>
-            <p>
-              <span className="font-semibold">Category:</span> {user?.type}
-            </p>
+            {user?.phone && (
+              <p>
+                <span className="font-semibold">Phone:</span> {user?.phone}
+              </p>
+            )}
+            {user?.organization && (
+              <p>
+                <span className="font-semibold">Company:</span>{" "}
+                {user.organization}
+              </p>
+            )}
           </div>
         </div>
         <div className="mt-8 flex flex-col items-center">
@@ -179,8 +200,11 @@ const DashboardPage = () => {
               id="qr-code"
               value={`NAME; ${user.full_name ? user.full_name : ""} ${
                 user.company_name ? user.company_name : ""
-              } STATUS: Registered for #NNIIS25 ✅`}
-              size={128}
+              } 
+STATUS : Registered as an individual for #NNIIS25 ✅`}
+              size={130}
+              bgColor="#FFFFFF"
+              fgColor="#0966C2"
             />
           )}
           <Button variant="outline" className="mt-4" onClick={handleDownload}>

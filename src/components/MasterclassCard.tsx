@@ -21,9 +21,6 @@ export const MasterclassCard = ({ masterclass }: MasterclassCardProps) => {
       <DialogTrigger asChild>
         <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col text-left group cursor-pointer h-full transition-all hover:shadow-xl hover:-translate-y-1">
           <div className="flex-grow">
-            <p className="text-sm font-semibold text-primary mb-2">
-              {masterclass.sector}
-            </p>
             <h3 className="text-lg font-bold text-gray-900 mb-4 leading-tight">
               {masterclass.title}
             </h3>
@@ -47,6 +44,9 @@ export const MasterclassCard = ({ masterclass }: MasterclassCardProps) => {
             with <span className="font-semibold">{masterclass.expert}</span>
           </p>
           <p className="text-sm text-gray-500 mb-4">{masterclass.company}</p>
+          <p className="text-sm text-gray-600 mb-4 italic">
+            "{masterclass.excerpt}"
+          </p>
           <Button asChild className="mt-auto w-full">
             <a href="/register">Register Now</a>
           </Button>

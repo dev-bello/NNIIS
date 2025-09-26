@@ -1,12 +1,13 @@
 export const config = {
   navLinks: [
+    { href: "/", label: "Home" },
     { href: "#about", label: "About" },
     { href: "#speakers", label: "Speakers" },
     {
       label: "Events",
       children: [
         { href: "/exhibition", label: "Sponsor & Exhibit" },
-        { href: "/masterclasses", label: "Masterclasses" },
+        { href: "/events", label: "Panels & Masterclasses" },
         { href: "/b2b", label: "B2B Matchmaking" },
       ],
     },
@@ -41,89 +42,77 @@ export const config = {
   ],
   masterclasses: [
     {
-      sector: "Tech",
-      title:
-        "Smart Infrastructure: Leveraging IoT & Data for Industrial Growth",
-      expert: "Abdul Samad Rabiu",
-      company: "BUA Group",
-      image: "/images/khalil-suleiman-halilu.jpg",
+      title: "PPP, Privatization in Northern Nigeria",
+      expert: "Nufi Yohanna Barnabas",
+      company: "CEO, Infracore Ltd.",
+      image: "/images/nufi.jpeg",
+      excerpt:
+        "Session will discuss mobilizing private sector funding for public infrastructure in Northern Nigeria.",
     },
     {
-      sector: "Agriculture",
-      title: "Building Export-Ready Agribusinesses in Northern Nigeria",
-      expert: "Dr. Akinwumi Adesina",
-      company: "African Development Bank",
-      image: "/speakers/adesina.png",
+      title: "Guidelines for Investing in Northern Nigeria",
+      expert: "Morty International",
+      company: "",
+      image: "/images/events/masterclass/masterclass 2.jpg",
+      excerpt:
+        "Session will focus on guidelines, processes, procedures on how to invest in Northern Nigeria.",
+    },
+  ],
+  panels: [
+    {
+      title: "Power",
+      topic:
+        "Bridging the Power deficit in Northern Nigeria: Scalable Investment Decentralization Systems and Grid resilience strategies for energy security.",
+      moderator: "Habu Sadeik - PwC, Power Sector Analyst",
+      panelists: [
+        "Abdullahi Garba - Chairman/CEO, NERC",
+        "Mahmuda Mamman – Permanent Secretary of the Ministry of Power",
+        "Ahmad Rufai Zakari, OON - ED, Kano Electric",
+        "Prof. Babakalli Alkali - Glasgow Caledonian University",
+        "Rahila Thomas - Chairperson, Kaduna Electric",
+      ],
     },
     {
-      sector: "Power / Energy",
-      title:
-        "Energy Efficiency & Smart Grids: Reducing Power Losses in Northern Nigeria",
-      expert: "Prof. Ango Abdullahi",
-      company: "Ahmadu Bello University",
-      image: "/images/profango.png",
+      title: "Agriculture",
+      topic:
+        "From Farm to Factory to Fortune: Pathway to Northern Nigeria Agro-Industrial Transformation.",
+      moderator: "Jafar Umar - DG NABG",
+      leadPresenter:
+        "Habiba Sulieman - Head of Strategic Partnerships, TGI Group",
+      panelists: [
+        "Sen. Abubakar Kyari Minister of Agriculture and Food Security",
+        "Habiba Sulieman - Head of Strategic Partnerships, TGI Group",
+        "Aminu M. Nyako - MD/CEO of Sebore Farms",
+        "Usman Ali Lawal – CEO USAIFA ",
+        "Redson Tedheke - CEO, NFGCS",
+      ],
     },
     {
-      sector: "Agriculture",
-      title: "Climate-Smart Dryland Farming: Innovations for Northern States",
-      expert: "Audu Ogbeh",
-      company: "Federal Ministry of Agriculture and Rural Development",
-      image: "/images/Audu-Ogbeh.jpg",
+      title: "Technology",
+      topic:
+        "Harnessing the Digital economy to boost growth in Northern Nigeria: Innovation in Mining, Agriculture and Power",
+      moderator: "Hafsah Aliyu - Data Analyst",
+      leadPresenter: "Surayyah Ahmad - Founding Partner, Sabou Capital ",
+      panelists: [
+        "Hon. Bello El-Rufai – MHoR, Kaduna North",
+        "Surayyah Ahmad - Founding Partner, Sabou Capital ",
+        "Aminu Bakori – Founder/CEO Sudo Africa",
+        "Al-Amin Idris – CEO Interface",
+        "Samail Sanusi – Founder Colab",
+      ],
     },
     {
-      sector: "Solid Minerals",
-      title: "Processing & Value Addition: Moving Beyond Raw Mineral Exports",
-      expert: "Aliko Dangote",
-      company: "Dangote Group",
-      image: "/speakers/dangote.png",
-    },
-    {
-      sector: "Agriculture",
-      title: "Value Chain Finance: Unlocking Capital for Smallholder Farmers",
-      expert: "Aliyu Abdullahi",
-      company: "Central Bank of Nigeria",
-      image: "/speakers/abdullahi.png",
-    },
-    {
-      sector: "Power / Energy",
-      title:
-        "Off-Grid Solar & Mini-Grids: Scaling Rural Electrification Profitably",
-      expert: "Mr. Habu Sadeik",
-      company: "Nigerian Electricity Regulatory Commission",
-      image: "/images/Habu-sadiek.jpg",
-    },
-
-    {
-      sector: "Solid Minerals",
-      title:
-        "Concession to Market: A-Z of Mineral Licensing & Investment Readiness",
-      expert: "Mr. Nura Ibrahim",
-      company: "Ministry of Mines and Steel Development",
-      image: "/images/events/masterclass/masterclass1.jpg",
-    },
-
-    {
-      sector: "Power / Energy",
-      title: "Policy & Licensing Mastery: Navigating Power Sector Regulations",
-      expert: "Mr. Tahir Abubakar",
-      company: "Transmission Company of Nigeria",
-      image: "/images/tahir.PNG",
-    },
-    {
-      sector: "Tech",
-      title:
-        "Digitizing Agriculture: Building Agri-Tech Solutions for Northern Farmers",
-      expert: "Mr. Khalil Suleiman Halilu ",
-      company:
-        "National Agency for Science and Engineering Infrastructure (NASENI)",
-      image: "/images/Khalil-suleiman-halilu.jpg",
-    },
-    {
-      sector: "Solid Minerals",
-      title: "Community Agreements & ESG in Mining",
-      expert: "Theophilus Danjuma",
-      company: "South Atlantic Petroleum",
-      image: "/images/danjuma.jpg",
+      title: "Mining",
+      topic:
+        "Harnessing Mining for Sustainable Growth in Northern Nigeria: Opportunities, Challenges, and Pathways to Inclusive Development",
+      moderator: "Nere Emiko, Founder/ Executive Vice Chairman of Kian Smith",
+      leadPresenter: "Prof. Ibrahim Garba",
+      panelists: [
+        "Dr. Henry Dele Alake, Minister of Solid Minerals Development",
+        "Engr Abdulrahman Ottan",
+        "Alhaji NASIRU Inuwa Wanda",
+        "Bello Mohammed ",
+      ],
     },
   ],
 };

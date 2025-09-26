@@ -7,13 +7,14 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/Register";
 import ExhibitionPage from "./pages/Exhibition";
-import MasterclassesPage from "./pages/Masterclasses";
+import EventsPage from "./pages/Events";
 import VolunteerPage from "./pages/Volunteer";
 import RegistrationSuccessPage from "./pages/RegistrationSuccess";
 import LoginPage from "./pages/Login";
 import VerifyOtpPage from "./pages/VerifyOtp";
 import DashboardPage from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import DashboardLayout from "./components/DashboardLayout";
 import B2BPage from "./pages/B2B";
 import StateDetailPage from "./pages/StateDetail";
 import SelectionStatusPage from "./pages/SelectionStatus";
@@ -31,7 +32,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/exhibition" element={<ExhibitionPage />} />
-          {/* <Route path="/masterclasses" element={<MasterclassesPage />} /> */}
+          <Route path="/events" element={<EventsPage />} />
           <Route path="/b2b" element={<B2BPage />} />
           {/* <Route path="/volunteer" element={<VolunteerPage />} /> */}
           <Route path="/volunteer" element={<VolunteerClose />} />
@@ -48,7 +49,9 @@ const App = () => (
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <DashboardPage />
+                <DashboardLayout>
+                  <DashboardPage />
+                </DashboardLayout>
               </ProtectedRoute>
             }
           />

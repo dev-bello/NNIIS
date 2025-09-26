@@ -72,6 +72,16 @@ const NorthernNigeriaSection = () => {
 
         <div className="relative mt-12 max-w-5xl mx-auto">
           <div id="map"></div>
+          <div className="text-center mt-4">
+            <a
+              href="https://www.ngf.org.ng"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-500 hover:text-gray-700"
+            >
+              Credit: Nigeria Governors Forum Investopedia
+            </a>
+          </div>
         </div>
       </div>
     </section>
