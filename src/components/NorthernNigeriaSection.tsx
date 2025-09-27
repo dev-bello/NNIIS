@@ -74,7 +74,7 @@ const NorthernNigeriaSection = () => {
           <div id="map"></div>
           <div className="text-center mt-4">
             <a
-              href="https://www.ngf.org.ng"
+              href="https://ngfrepository.org.ng:8443/jspui/handle/123456789/6516"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-500 hover:text-gray-700"

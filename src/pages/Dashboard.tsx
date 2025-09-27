@@ -201,6 +201,7 @@ const DashboardPage = () => {
               value={`NAME; ${user.full_name ? user.full_name : ""} ${
                 user.company_name ? user.company_name : ""
               } 
+EMAIL: '${user.email}'
 STATUS : Registered as an individual for #NNIIS25 ✅`}
               size={130}
               bgColor="#FFFFFF"
